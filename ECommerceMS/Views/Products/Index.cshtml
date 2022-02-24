@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ECommerceMS.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<hr id="scroll"/>
+<h2 style="text-align:center;font-family:'Courgette',cursive;font-size:50px">Products</h2>
+<hr />
+<p>
+    <a asp-action="Create" class ="btn btn-primary" style="margin:10px;color:white">Create New</a>
+</p>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+         {
+            <div class="col-lg-4  col-md-6">
+              <div class="thumbnail">
+                    <div class="caption" style="text-align:center">
+                       <a asp-action="Details" asp-route-id="@item.Id"><img src="\Images\@item.Image" /></a>
+                        <p></p>
+                        <p style="font-size:20px">@item.Name</p>
+                        <p style="font-size:20px">@item.Price</p>
+                        <p style="font-size:20px">@item.IsFavourite</p>
+                        <p style="font-size:20px">@item.IsInStock</p>
+                        <br>
+                    </div>
+               </div>
+            </div>
+         }
+ 
+    </div>
+</div>
+<br />

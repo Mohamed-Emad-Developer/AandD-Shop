@@ -15,6 +15,7 @@ namespace ECommerceMS.Models
         public decimal Price { get; set; }
         public bool IsFavourite { get; set; }
         public bool IsInStock { get; set; }
+
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
