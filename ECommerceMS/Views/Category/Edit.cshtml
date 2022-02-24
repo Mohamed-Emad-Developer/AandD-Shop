@@ -1,0 +1,29 @@
+﻿@model ECommerceMS.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Category</h1>
+<form method="post" asp-action="Edit" asp-route-id="@Model.Id" asp-controller="Category">
+     <div asp-validation-summary="All" class="text-danger"></div>
+     <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control"/>
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+     <div >
+        <label asp-for="Image"></label>
+        <input asp-for="Image" class="form-control"/>
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+     <br />
+    <input type="submit" value="Edit" class="btn btn-danger"/>
+</form>
+<hr />
+<a  asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Back To Details</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
