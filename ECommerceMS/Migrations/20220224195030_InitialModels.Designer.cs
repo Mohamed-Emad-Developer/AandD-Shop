@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceMS.Migrations
 {
     [DbContext(typeof(ECommerceDB))]
-    [Migration("20220222114644_InitialModels")]
+    [Migration("20220224195030_InitialModels")]
     partial class InitialModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,7 @@ namespace ECommerceMS.Migrations
                     b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("OrderNum")
+                    b.Property<int?>("OrderNum")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -132,10 +132,13 @@ namespace ECommerceMS.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -156,6 +159,21 @@ namespace ECommerceMS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("ECommerceMS.Models.FavouriteList", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ProductId", "CustomerId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("FavouriteLists");
                 });
 
             modelBuilder.Entity("ECommerceMS.Models.Order", b =>
@@ -203,12 +221,6 @@ namespace ECommerceMS.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsFavourite")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsInStock")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -216,6 +228,9 @@ namespace ECommerceMS.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Size")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -233,6 +248,9 @@ namespace ECommerceMS.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId", "CartId");
@@ -407,9 +425,7 @@ namespace ECommerceMS.Migrations
 
                     b.HasOne("ECommerceMS.Models.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderNum")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderNum");
 
                     b.Navigation("Customer");
 
@@ -425,6 +441,25 @@ namespace ECommerceMS.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ECommerceMS.Models.FavouriteList", b =>
+                {
+                    b.HasOne("ECommerceMS.Models.Customer", "Customer")
+                        .WithMany("FavouriteList")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerceMS.Models.Product", "Product")
+                        .WithMany("FavouriteList")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("ECommerceMS.Models.Order", b =>
@@ -547,6 +582,11 @@ namespace ECommerceMS.Migrations
                     b.Navigation("ProductCarts");
                 });
 
+            modelBuilder.Entity("ECommerceMS.Models.Customer", b =>
+                {
+                    b.Navigation("FavouriteList");
+                });
+
             modelBuilder.Entity("ECommerceMS.Models.Order", b =>
                 {
                     b.Navigation("ProductOrders");
@@ -554,6 +594,8 @@ namespace ECommerceMS.Migrations
 
             modelBuilder.Entity("ECommerceMS.Models.Product", b =>
                 {
+                    b.Navigation("FavouriteList");
+
                     b.Navigation("ProductCarts");
 
                     b.Navigation("ProductOrders");

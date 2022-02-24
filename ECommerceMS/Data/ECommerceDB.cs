@@ -32,7 +32,7 @@ namespace ECommerceMS.Data
                  .WithMany(o=>o.ProductOrders)
                  .HasForeignKey(po=>po.OrderNum);
            //====================================================================================== 
-            base.OnModelCreating(modelBuilder);
+           
             modelBuilder.Entity<ProductCarts>().HasKey(pc => new {pc.ProductId, pc.CartId});
 
             modelBuilder.Entity<ProductCarts>()
@@ -45,6 +45,20 @@ namespace ECommerceMS.Data
                  .HasOne<Cart>(pc => pc.Cart)
                  .WithMany(c=>c.ProductCarts)
                  .HasForeignKey(pc=>pc.CartId);
+            //====================================================================================== 
+           
+            modelBuilder.Entity<FavouriteList>().HasKey(f => new {f.ProductId, f.CustomerId});
+
+            modelBuilder.Entity<FavouriteList>()
+                 .HasOne<Product>(f=> f.Product)
+                 .WithMany(p=>p.FavouriteList)
+                 .HasForeignKey(f=>f.ProductId);
+
+
+            modelBuilder.Entity<FavouriteList>()
+                 .HasOne<Customer>(f => f.Customer)
+                 .WithMany(c=>c.FavouriteList)
+                 .HasForeignKey(f=>f.CustomerId);
 
             #endregion
         }
@@ -57,5 +71,6 @@ namespace ECommerceMS.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCarts> ProductCarts { get; set; }
         public DbSet<ProductOrders> ProductOrders { get; set; }
+        public DbSet<FavouriteList> FavouriteLists { get; set; }
     }
 }

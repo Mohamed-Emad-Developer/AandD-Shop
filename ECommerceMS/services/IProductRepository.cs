@@ -10,5 +10,6 @@ namespace ECommerceMS.services
         List<Product> GetAll();
         Product GetById(int id);
         int Update(int id, Product prod);
+        List<FavouriteList> GetFavouriteProducts(string customerId);
     }
 }

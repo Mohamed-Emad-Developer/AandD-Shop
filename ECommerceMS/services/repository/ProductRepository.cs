@@ -41,8 +41,8 @@ namespace ECommerceMS.services
             product.Color = prod.Color;
             product.Price = prod.Price;
             product.CategoryId = prod.CategoryId;
-            product.IsFavourite = prod.IsFavourite;
-            product.IsInStock = prod.IsInStock;
+            product.StockQuantity = prod.StockQuantity;
+           
             int raw = DBContext.SaveChanges();
             return raw;
         }
@@ -53,6 +53,11 @@ namespace ECommerceMS.services
             DBContext.Products.Remove(product);
             int raw = DBContext.SaveChanges();
             return raw;
+        }
+        public List<FavouriteList> GetFavouriteProducts(string customerId)
+        {
+            var products = DBContext.FavouriteLists.Where(f => f.CustomerId ==  customerId).ToList();
+            return products;
         }
     }
 }

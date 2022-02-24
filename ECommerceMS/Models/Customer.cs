@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerceMS.Models
@@ -11,5 +12,10 @@ namespace ECommerceMS.Models
         public string Address { get; set; }
         public string Phone { get; set; }
         public ApplicationUser User { get; set; }
+        public ICollection<FavouriteList> FavouriteList { get; set; }
+        public Customer()
+        {
+            FavouriteList = new List<FavouriteList>();
+        }
     }
 }

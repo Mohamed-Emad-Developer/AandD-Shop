@@ -1,17 +1,24 @@
-﻿using ECommerceMS.Models;
+﻿using ECommerceMS.Data;
+using ECommerceMS.Models;
 using ECommerceMS.services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ECommerceMS.Controllers
 {
     public class ProductsController : Controller
     {
         readonly IProductRepository ProductRepository;
-
-        public ProductsController(IProductRepository _ProddRepo)
+        private readonly ECommerceDB context;
+        private readonly UserManager<ApplicationUser> userManager;
+        public ProductsController(IProductRepository _ProddRepo, ECommerceDB context, UserManager<ApplicationUser> userManager)
         {
             ProductRepository = _ProddRepo;
+            this.context = context;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
@@ -72,5 +79,17 @@ namespace ECommerceMS.Controllers
             ProductRepository.Delete(id);
             return RedirectToAction("Index");
         }
+
+        public IActionResult FavouriteProducts()
+        {
+
+            var products = ProductRepository.GetFavouriteProducts(userManager.GetUserId(User));
+            return View(products);
+         
+        }
+
+
+
+
     }
 }
