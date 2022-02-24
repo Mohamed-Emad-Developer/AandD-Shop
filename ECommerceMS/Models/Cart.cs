@@ -10,7 +10,7 @@ namespace ECommerceMS.Models
         public DateTime AddedAt { get; set; }
 
         [ForeignKey("Order")]
-        public int OrderNum { get; set; }
+        public int? OrderNum { get; set; }
         public Order Order { get; set; }
 
         [ForeignKey("Customer")]
