@@ -16,14 +16,20 @@ namespace ECommerceMS.Controllers
         //Get All Catgories
         public IActionResult Index()
         {
-            List<Category> CtgModel = categoryRepository.getAll();
+            List<Category> CtgModel = categoryRepository.GetAll();
             return View(CtgModel);
+        }
+        //Get All Catgories
+        public IActionResult Search(string searchString)
+        {
+            List<Category> CtgModel = categoryRepository.GetAllSearch(searchString);
+            return View("Index" ,CtgModel);
         }
 
         //Get Catgory Details
         public IActionResult Details(int id)
         {
-            Category CtgDetailsModel = categoryRepository.getById(id);
+            Category CtgDetailsModel = categoryRepository.GetById(id);
             return View(CtgDetailsModel);
         }
 
@@ -41,7 +47,7 @@ namespace ECommerceMS.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                categoryRepository.create(newCtg);
+                categoryRepository.Create(newCtg);
                 return RedirectToAction("Index");
             }
 
@@ -51,7 +57,7 @@ namespace ECommerceMS.Controllers
         //Edit Catgory
         public IActionResult Edit(int id)
         {
-            Category Ctg = categoryRepository.getById(id);
+            Category Ctg = categoryRepository.GetById(id);
             return View(Ctg);
         }
 
@@ -60,7 +66,7 @@ namespace ECommerceMS.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                categoryRepository.update(id, newCtg);
+                categoryRepository.Update(id, newCtg);
                 return RedirectToAction("Index");
             }
 
@@ -70,14 +76,14 @@ namespace ECommerceMS.Controllers
         //Delete Catgory
         public IActionResult Delete(int id)
         {
-            Category ctg = categoryRepository.getById(id);
+            Category ctg = categoryRepository.GetById(id);
             return View(ctg);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult ConfirmeDelete(int id)
         {
-            categoryRepository.delete(id);
+            categoryRepository.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -86,7 +92,7 @@ namespace ECommerceMS.Controllers
         {
             if (id == 0)
             {
-                Category Ctg = categoryRepository.getByName(Title);
+                Category Ctg = categoryRepository.GetByName(Title);
                 if (Ctg == null)
                     return Json(true);
                 else
@@ -94,7 +100,7 @@ namespace ECommerceMS.Controllers
             }
             else
             {
-                Category Ctg = categoryRepository.getByName(Title);
+                Category Ctg = categoryRepository.GetByName(Title);
                 if (Ctg == null)
                     return Json(true);
                 else
