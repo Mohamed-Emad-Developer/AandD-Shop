@@ -1,16 +1,25 @@
 ﻿using ECommerceMS.Models;
 using ECommerceMS.services.repository;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ECommerceMS.Controllers
 {
     public class CategoryController : Controller
     {
         readonly ICategoryRepository categoryRepository;
-        public CategoryController(ICategoryRepository _ctgRepo)
+        private readonly IWebHostEnvironment _hostEnv;
+
+        public CategoryController(ICategoryRepository _ctgRepo, IWebHostEnvironment hostEnv)
         {
             categoryRepository = _ctgRepo;
+            this._hostEnv = hostEnv;
         }
 
         //Get All Catgories
@@ -62,10 +71,20 @@ namespace ECommerceMS.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute] int id, Category newCtg)
+        public IActionResult Edit([FromRoute] int id, Category newCtg /* , IFormFile Image*/)
         {
             if (ModelState.IsValid == true)
             {
+                //if (newCtg.Image != null)
+                //{
+                //    string imageName = new String(Path.GetFileNameWithoutExtension(Image.FileName).Take(10).ToArray()).Replace(' ', '-');
+                //    imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(Image.FileName);
+                //    var imagePath = Path.Combine(_hostEnv.ContentRootPath, "wwwroot/Images/Categories", imageName);
+                //    using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                //    {
+                //        await Image.CopyToAsync(fileStream);
+                //    }
+                //}
                 categoryRepository.Update(id, newCtg);
                 return RedirectToAction("Index");
             }
