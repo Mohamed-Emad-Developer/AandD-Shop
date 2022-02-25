@@ -13,8 +13,8 @@ namespace ECommerceMS.Models
         public Size Size { get; set; }
         public string Color { get; set; }
         public decimal Price { get; set; }
-        public bool IsFavourite { get; set; }
-        public bool IsInStock { get; set; }
+        public int StockQuantity { get; set; }
+
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
@@ -24,10 +24,12 @@ namespace ECommerceMS.Models
         public Admin Admin { get; set; }
         public ICollection<ProductOrders> ProductOrders { get; set; }
         public ICollection<ProductCarts> ProductCarts { get; set; }
+        public ICollection<FavouriteList> FavouriteList { get; set; }
         public Product()
         {
             ProductOrders = new List<ProductOrders>();
             ProductCarts = new List<ProductCarts>();
+            FavouriteList = new List<FavouriteList>();
         }
     }
 }

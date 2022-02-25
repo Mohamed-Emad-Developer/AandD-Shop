@@ -1,5 +1,7 @@
 using ECommerceMS.Data;
 using ECommerceMS.Models;
+using ECommerceMS.services;
+using ECommerceMS.services.repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +38,8 @@ namespace ECommerceMS
 
             //for configure Idenity to users for login and registeration
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ECommerceDB>().AddDefaultTokenProviders();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
         }
 

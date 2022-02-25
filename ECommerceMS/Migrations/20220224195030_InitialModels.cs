@@ -53,8 +53,8 @@ namespace ECommerceMS.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,8 +215,7 @@ namespace ECommerceMS.Migrations
                     Size = table.Column<int>(type: "int", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsFavourite = table.Column<bool>(type: "bit", nullable: false),
-                    IsInStock = table.Column<bool>(type: "bit", nullable: false),
+                    StockQuantity = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     AdminId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -259,13 +258,37 @@ namespace ECommerceMS.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FavouriteLists",
+                columns: table => new
+                {
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FavouriteLists", x => new { x.ProductId, x.CustomerId });
+                    table.ForeignKey(
+                        name: "FK_FavouriteLists_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FavouriteLists_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Carts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderNum = table.Column<int>(type: "int", nullable: false),
+                    OrderNum = table.Column<int>(type: "int", nullable: true),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -282,7 +305,7 @@ namespace ECommerceMS.Migrations
                         column: x => x.OrderNum,
                         principalTable: "Orders",
                         principalColumn: "OrderNum",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -314,7 +337,8 @@ namespace ECommerceMS.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    CartId = table.Column<int>(type: "int", nullable: false)
+                    CartId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -383,6 +407,11 @@ namespace ECommerceMS.Migrations
                 column: "OrderNum");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FavouriteLists_CustomerId",
+                table: "FavouriteLists",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
@@ -424,6 +453,9 @@ namespace ECommerceMS.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "FavouriteLists");
 
             migrationBuilder.DropTable(
                 name: "ProductCarts");

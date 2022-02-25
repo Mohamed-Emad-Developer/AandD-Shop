@@ -1,0 +1,29 @@
+﻿@model ECommerceMS.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<table class="table table-bordered table-hover" style="font-size:20px">
+    <thead style="text-align:center">
+       <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th colspan="2">Actions</th>
+       </tr>
+    </thead>
+    <tbody style="text-align:center">
+         <tr>
+            <td><img src="~/Images/Categories/@Model.Image" width="250" height="250"/></td>
+            <td>@Model.Title</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class = "btn btn-success" >✍️ Edit</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class = "btn btn-danger " >🗑️ Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+  <a asp-action="Index" class = "btn btn-secondary">Back to List</a>
+<hr />
+
