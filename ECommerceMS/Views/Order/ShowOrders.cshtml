@@ -1,0 +1,89 @@
+﻿@model List<Order>
+<div class="row">
+    <div class="col-6 card text-center">
+        <div class="card-header">
+            AllOrders
+        </div>
+        <div class="card-body">
+            @foreach(var item in Model)
+            {
+            <div class="card">
+                <div style="display:flex; flex:1 1 auto">
+                    <div class="card-body p-1 m-1">
+                        
+                        <p class="Card-text">
+                            <div>
+                                <span>Customer : </span> @item.Customer.User.Name
+                            </div>
+                            <div>
+                                <span> Adress : </span>@item.Customer.Address
+                            </div>  
+                            <div>
+                                <span> Phone : </span>@item.Customer.Phone
+                            </div>
+                            <div>
+                                <span> ordered at : </span>@item.Date
+                            </div>
+                            <div class="m-2">
+                                <input type="button" onclick="AjaxCall('@item.OrderNum')" value="products" class="btn btn-danger"/>
+                            </div>
+                        </p>
+                        <div>
+                           <div class="row m-2">
+@*                               <div class="col-12 card text-center">
+                                   <div class="card-header text-muted">
+                                        products 
+                                   </div>
+                                   <div class="card-body p-1 m-1">
+                                        @foreach(var product in item.ProductOrders)
+                                        {
+                                        <div class="card">
+                                            <div style="display:flex; flex:1 1 auto">
+                                                <div class="img-square-wrapper">
+                                                    <img  src="/Images/@product.Product.Image" alt="Card image cap" class="rounded-circle mb-3" style="width:65px;">
+                                                </div>
+                                                <div class="card-body p-1 m-1">
+                                                    <h4 class="card-title">@product.Product.Name</h4>
+                                                    <p class="card-text text-break">@product.Product.Description</p>
+                                                    <p class="card-text"><span>Size: </span>@product.Product.Size</p>
+                                                    <p class="card-text text-danger"><span>Price: </span>@product.Product.Price</p>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
+                                   </div>
+                                   <div class="card-footer">
+                                       @item.Cost
+                                   </div>
+                               </div>*@
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div> 
+        <div class="card-footer text-muted"> 
+        </div>
+    </div>
+    <div class="col-6" id="div1">        
+    </div>
+</div>
+@section Scripts{
+<script>
+    function AjaxCall(val2){
+        var id=val2
+        console.log(id);
+        $.ajax(
+            {
+                url  : "/Order/GetProductsOfOrder",
+                data :{"id":id},
+                success: function(result){
+                            $("#div1").html(result);
+                    }
+            }
+            );
+       }
+</script>
+}

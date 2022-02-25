@@ -1,5 +1,7 @@
 using ECommerceMS.Data;
 using ECommerceMS.Models;
+using ECommerceMS.services;
+using ECommerceMS.services.repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -36,7 +38,10 @@ namespace ECommerceMS
 
             //for configure Idenity to users for login and registeration
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ECommerceDB>().AddDefaultTokenProviders();
-
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IProductOrdersRepository, ProductOrdersRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

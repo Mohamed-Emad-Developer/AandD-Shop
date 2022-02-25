@@ -4,14 +4,16 @@ using ECommerceMS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerceMS.Migrations
 {
     [DbContext(typeof(ECommerceDB))]
-    partial class ECommerceDBModelSnapshot : ModelSnapshot
+    [Migration("20220224014510_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,7 +112,7 @@ namespace ECommerceMS.Migrations
                     b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("OrderNum")
+                    b.Property<int>("OrderNum")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -249,9 +251,6 @@ namespace ECommerceMS.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("OrderNum")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId", "OrderNum");
@@ -411,7 +410,9 @@ namespace ECommerceMS.Migrations
 
                     b.HasOne("ECommerceMS.Models.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderNum");
+                        .HasForeignKey("OrderNum")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
