@@ -11,7 +11,7 @@ namespace ECommerceMS.Models
         public string Image { get; set; }
         public string Description { get; set; }
         public Size Size { get; set; }
-        public string Color { get; set; }
+        public Color Color { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
 

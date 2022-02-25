@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceMS.Migrations
 {
     [DbContext(typeof(ECommerceDB))]
-    [Migration("20220224195030_InitialModels")]
+    [Migration("20220225112129_InitialModels")]
     partial class InitialModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -212,8 +212,8 @@ namespace ECommerceMS.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Color")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
