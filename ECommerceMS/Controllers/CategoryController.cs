@@ -7,16 +7,16 @@ namespace ECommerceMS.Controllers
 {
     public class CategoryController : Controller
     {
-        ICategoryRepository categoryRepository;
+        readonly ICategoryRepository categoryRepository;
         public CategoryController(ICategoryRepository _ctgRepo)
         {
             categoryRepository = _ctgRepo;
         }
 
         //Get All Catgories
-        public IActionResult Index(string searchString)
+        public IActionResult Index()
         {
-            List<Category> CtgModel = categoryRepository.getAll(searchString);
+            List<Category> CtgModel = categoryRepository.getAll();
             return View(CtgModel);
         }
 
@@ -31,7 +31,7 @@ namespace ECommerceMS.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            Category ctg = new Category();
+            Category ctg = new();
             return View(ctg);
         }
 

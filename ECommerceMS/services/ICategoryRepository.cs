@@ -7,7 +7,7 @@ namespace ECommerceMS.services.repository
     {
         int create(Category Ctg);
         int delete(int id);
-        List<Category> getAll(string searchString);
+        List<Category> getAll();
         Category getById(int id);
         Category getByName(string title);
         int update(int id, Category Ctg);

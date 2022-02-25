@@ -1,23 +1,21 @@
-﻿using ECommerceMS.Data;
-using ECommerceMS.Models;
+﻿using ECommerceMS.Models;
 using ECommerceMS.services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 using System.Collections.Generic;
-using System.Linq;
+using ECommerceMS.services.repository;
 
 namespace ECommerceMS.Controllers
 {
     public class ProductsController : Controller
     {
         readonly IProductRepository ProductRepository;
-        private readonly ECommerceDB context;
+        readonly ICategoryRepository CategoryRepository;
         private readonly UserManager<ApplicationUser> userManager;
-        public ProductsController(IProductRepository _ProddRepo, ECommerceDB context, UserManager<ApplicationUser> userManager)
+        public ProductsController(IProductRepository _ProddRepo, UserManager<ApplicationUser> userManager, ICategoryRepository _CatRepo)
         {
             ProductRepository = _ProddRepo;
-            this.context = context;
+            CategoryRepository = _CatRepo;
             this.userManager = userManager;
         }
 
@@ -30,13 +28,16 @@ namespace ECommerceMS.Controllers
         public IActionResult Details(int id)
         {
             Product product = ProductRepository.GetById(id);
+            List<Category> category = CategoryRepository.getAll();
+            ViewData["Categories"] = category;
             return View(product);
         }
 
         public IActionResult Create()
         {
-            Product product = new();
-            return View(product);
+            List<Category> category = CategoryRepository.getAll();
+            ViewData["Categories"] = category;
+            return View();
         }
 
         [HttpPost]
@@ -47,12 +48,16 @@ namespace ECommerceMS.Controllers
                 ProductRepository.Create(prod);
                 return RedirectToAction("Index");
             }
+            List<Category> category = CategoryRepository.getAll();
+            ViewData["Categories"] = category;
             return View(prod);
         }
 
         public IActionResult Edit(int id)
         {
             Product product = ProductRepository.GetById(id);
+            List<Category> category = CategoryRepository.getAll();
+            ViewData["Categories"] = category;
             return View(product);
         }
 
@@ -64,12 +69,16 @@ namespace ECommerceMS.Controllers
                 ProductRepository.Update(id, prod);
                 return RedirectToAction("Index");
             }
+            List<Category> category = CategoryRepository.getAll();
+            ViewData["Categories"] = category;
             return View(prod);
         }
 
         public IActionResult Delete(int id)
         {
             Product product = ProductRepository.GetById(id);
+            List<Category> category = CategoryRepository.getAll();
+            ViewData["Categories"] = category;
             return View(product);
         }
 
@@ -77,6 +86,8 @@ namespace ECommerceMS.Controllers
         public IActionResult ConfirmeDelete(int id)
         {
             ProductRepository.Delete(id);
+            List<Category> category = CategoryRepository.getAll();
+            ViewData["Categories"] = category;
             return RedirectToAction("Index");
         }
 

@@ -13,9 +13,9 @@ namespace ECommerceMS.services.repository
         {
             context = _context;
         }
-        public List<Category> getAll(string searchString)
+        public List<Category> getAll()
         {
-            return context.Categories.Where(c => c.Title!.Contains(searchString) || searchString == null).ToList();
+            return context.Categories.ToList();
         }
 
         public Category getById(int id)
