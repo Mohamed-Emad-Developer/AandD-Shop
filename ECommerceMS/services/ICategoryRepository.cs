@@ -5,11 +5,12 @@ namespace ECommerceMS.services.repository
 {
     public interface ICategoryRepository
     {
-        int create(Category Ctg);
-        int delete(int id);
-        List<Category> getAll(string searchString);
-        Category getById(int id);
-        Category getByName(string title);
-        int update(int id, Category Ctg);
+        int Create(Category Ctg);
+        int Delete(int id);
+        List<Category> GetAll();
+        List<Category> GetAllSearch(string searchString);
+        Category GetById(int id);
+        Category GetByName(string title);
+        int Update(int id, Category Ctg);
     }
 }

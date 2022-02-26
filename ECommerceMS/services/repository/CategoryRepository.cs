@@ -13,28 +13,33 @@ namespace ECommerceMS.services.repository
         {
             context = _context;
         }
-        public List<Category> getAll(string searchString)
+        public List<Category> GetAll()
+        {
+            return context.Categories.ToList();
+        }
+        
+        public List<Category> GetAllSearch(string searchString)
         {
             return context.Categories.Where(c => c.Title!.Contains(searchString) || searchString == null).ToList();
         }
 
-        public Category getById(int id)
+        public Category GetById(int id)
         {
             return context.Categories.FirstOrDefault(c => c.Id == id);
         }
-        public Category getByName(string title)
+        public Category GetByName(string title)
         {
             return context.Categories.FirstOrDefault(c => c.Title == title);
         }
 
-        public int create(Category Ctg)
+        public int Create(Category Ctg)
         {
             context.Categories.Add(Ctg);
             int raw = context.SaveChanges();
             return raw;
         }
 
-        public int update(int id, Category Ctg)
+        public int Update(int id, Category Ctg)
         {
             Category ctg = context.Categories.FirstOrDefault(c => c.Id == id);
             ctg.Title = Ctg.Title;
@@ -42,7 +47,7 @@ namespace ECommerceMS.services.repository
             int raw = context.SaveChanges();
             return raw;
         }
-        public int delete(int id)
+        public int Delete(int id)
         {
             Category ctg = context.Categories.FirstOrDefault(c => c.Id == id);
             context.Categories.Remove(ctg);
