@@ -1,5 +1,6 @@
 ﻿using ECommerceMS.Data;
 using ECommerceMS.Models;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,7 +44,7 @@ namespace ECommerceMS.services.repository
         {
             Category ctg = context.Categories.FirstOrDefault(c => c.Id == id);
             ctg.Title = Ctg.Title;
-            ctg.Image = Ctg.Image;
+            ctg.Image= Ctg.Image;
             int raw = context.SaveChanges();
             return raw;
         }

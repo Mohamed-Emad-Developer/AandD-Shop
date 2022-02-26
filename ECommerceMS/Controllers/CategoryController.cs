@@ -71,20 +71,10 @@ namespace ECommerceMS.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute] int id, Category newCtg /* , IFormFile Image*/)
+        public IActionResult Edit([FromRoute] int id, Category newCtg)
         {
             if (ModelState.IsValid == true)
             {
-                //if (newCtg.Image != null)
-                //{
-                //    string imageName = new String(Path.GetFileNameWithoutExtension(Image.FileName).Take(10).ToArray()).Replace(' ', '-');
-                //    imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(Image.FileName);
-                //    var imagePath = Path.Combine(_hostEnv.ContentRootPath, "wwwroot/Images/Categories", imageName);
-                //    using (var fileStream = new FileStream(imagePath, FileMode.Create))
-                //    {
-                //        await Image.CopyToAsync(fileStream);
-                //    }
-                //}
                 categoryRepository.Update(id, newCtg);
                 return RedirectToAction("Index");
             }
