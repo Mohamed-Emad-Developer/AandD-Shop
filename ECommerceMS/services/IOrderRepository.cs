@@ -9,5 +9,6 @@ namespace ECommerceMS.services.repository
         int Create(OrderDetailsViewModel newOrder, string Customer_ID);
         List<Order> Get();
         Order Get(int id);
+        List<Order> GetByCusID(string id);
     }
 }

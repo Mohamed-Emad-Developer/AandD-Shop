@@ -32,6 +32,10 @@ namespace ECommerceMS.services.repository
         {
             return (DBContext.Orders.Include(x => x.Customer).ThenInclude(x => x.User)).Include(x=>x.ProductOrders).ThenInclude(x=>x.Product).FirstOrDefault(x=>x.OrderNum==id);
         }
+        public List<Order> GetByCusID(string id)
+        {
+            return DBContext.Orders.Include(x=>x.ProductOrders).ThenInclude(x=>x.Product).Where(x=>x.CustomerId==id).ToList();
+        }
     }
 
 

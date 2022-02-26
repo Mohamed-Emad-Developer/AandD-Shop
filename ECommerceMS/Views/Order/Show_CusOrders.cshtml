@@ -1,0 +1,57 @@
+﻿@model List<Order>
+<div class="row">
+    <div class="col-6 card text-center">
+        <div class="card-header">
+            AllOrders
+        </div>
+        <div class="card-body">
+            @foreach(var item in Model)
+            {
+            <div class="card">
+                <div style="display:flex; flex:1 1 auto">
+                    <div class="card-body p-1 m-1">                        
+                        <p class="Card-text">
+                            <div>
+                                <span>Name : </span> @item.CustomerName
+                            </div>
+                            <div>
+                                <span> Adress : </span>@item.CustomerAddress
+                            </div>  
+                            <div>
+                                <span> Phone : </span>@item.CustomerPhone
+                            </div>
+                            <div>
+                                <span> ordered at : </span>@item.Date
+                            </div>
+                            <div class="m-2">
+                                <input type="button" onclick="AjaxCall('@item.OrderNum')" value="products" class="btn btn-danger"/>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div> 
+        <div class="card-footer text-muted"> 
+        </div>
+    </div>
+    <div class="col-6" id="div1">        
+    </div>
+</div>
+@section Scripts{
+<script>
+    function AjaxCall(val2){
+        var id=val2
+        console.log(id);
+        $.ajax(
+            {
+                url  : "/Order/GetProductsOfOrder",
+                data :{"id":id},
+                success: function(result){
+                    $("#div1").html(result);
+                }
+            }
+        );
+       }
+</script>
+}

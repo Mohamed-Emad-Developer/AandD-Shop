@@ -63,6 +63,7 @@ namespace ECommerceMS.Controllers
                     item.Product.StockQuantity=item.Product.StockQuantity-1;
                 }
                 ViewData["success"] = "Order Saved successfully";
+                ViewData["CustomerID"] = CustomerId;
                 return View();
             }
             else
@@ -70,15 +71,20 @@ namespace ECommerceMS.Controllers
                 return View("CheckOut",newOrder);
             }
         }
-        public IActionResult ShowOrders()
+        public IActionResult ShowOrders() // Show All orders for admin
         {
             List<Order> orders = orderRepository.Get();
             return View(orders);
         }
-        public IActionResult GetProductsOfOrder(int id)
+        public IActionResult GetProductsOfOrder(int id) // Show products for each order
         {
             Order order = orderRepository.Get(id);
             return PartialView("_GetProducts", order);
+        }
+        public IActionResult Show_CusOrders(string id) // show orders for a specified customer
+        {
+            List<Order> orders = orderRepository.GetByCusID(id);
+            return View(orders);
         }
     }
 }
