@@ -8,28 +8,29 @@
 <h2 style="text-align:center;font-family:'Courgette',cursive;font-size:50px">Products</h2>
 <hr />
 <p>
-    <a asp-action="Create" class ="btn btn-primary" style="margin:10px;color:white">Create New</a>
+    <a asp-action="Create" class ="btn btn-primary" style="margin:10px;color:white">Create New Product</a>
 </p>
 
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
-         {
-            <div class="col-lg-4  col-md-6">
-              <div class="thumbnail">
-                    <div class="caption" style="text-align:center">
-                       <a asp-action="Details" asp-route-id="@item.Id"><img src="\Images\@item.Image" /></a>
-                        <p></p>
-                        <p style="font-size:20px">@item.Name</p>
-                        <p style="font-size:20px">@item.Price</p>
-                        <p style="font-size:20px">@item.StockQuantity</p>
-                       
-                        <br>
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn" style="font-size: 30px; text-align: left;">🛒</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn" style="font-size: 30px; text-align: right;">❤️</a>
                     </div>
-               </div>
+                    <img src="~/Images/Products/@item.Image" class="card-img-top" style="height: 300px;">
+                    <div class="card-body" style="text-align: center;">
+                        <h4>@item.Name</h4>
+                        <h4>@item.Price $</h4>
+                        <a asp-action="Details" asp-route-id="@item.Id" class ="btn btn-secondary w-100">Details</a>
+                    </div>
+                </div>
+                 <br>
             </div>
-         }
- 
+        }
     </div>
 </div>
-<br />
+<hr />

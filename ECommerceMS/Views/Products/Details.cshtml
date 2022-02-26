@@ -1,74 +1,68 @@
 ﻿@model ECommerceMS.Models.Product
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Product Details";
 }
 
-<h1>Details</h1>
+<h1>Product Details</h1>
+<hr />
 
 <div>
-    <h4>Product</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
+            Image
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
+            <img src="~/Images/Products/@Model.Image" width="300" height="300" />
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Size)
+            Size
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Size)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Color)
+            Color
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Color)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
+            Price
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Price) $
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StockQuantity)
+            Quantity
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.StockQuantity)
         </dd>
-     
-        
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
+            Category
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Admin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Admin.Id)
+            @Html.DisplayFor(model => model.Category.Title)
         </dd>
     </dl>
 </div>
+
+<hr />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edit Product</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Product</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to Products</a>
 </div>

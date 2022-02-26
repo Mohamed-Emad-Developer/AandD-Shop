@@ -2,24 +2,23 @@
 @model ECommerceMS.Models.Product
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Product";
 }
 
 @{
     SelectList categories;
     if (Model != null)
     {
-        categories = new SelectList(ViewBag.Categories, "Id", "Name", Model.CategoryId);
+        categories = new SelectList(ViewBag.Categories, "Id", "Title", Model.CategoryId);
     }
     else
     {
-        categories = new SelectList(ViewBag.Categories, "Id", "Name");
+        categories = new SelectList(ViewBag.Categories, "Id", "Title");
     }
 }
 
-<h1>Edit</h1>
+<h1>Edit Product</h1>
 
-<h4>Product</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -43,12 +42,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Size" class="control-label">Size</label>
-                <select asp-for="Size" asp-items="Html.GetEnumSelectList<Size>()" class="form-control"></select>
+                <select asp-for="Size" asp-items="Html.GetEnumSelectList<Size>()" class="form-control">
+                    <option>Select Product Size</option>
+                </select>
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Color" class="control-label">Color</label>
-                <select asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()" class="form-control"></select>
+                <select asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()" class="form-control">
+                    <option>Select Product Color</option>
+                </select>
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -63,17 +66,21 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label">Category</label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="categories"></select>
+                <select asp-for="CategoryId" class="form-control" asp-items="categories">
+                    <option>Select Product Category</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Edit Product" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
+<hr />
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to Products</a>
 </div>
 
 @section Scripts {
