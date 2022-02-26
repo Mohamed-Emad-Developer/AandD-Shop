@@ -40,6 +40,10 @@ namespace ECommerceMS
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ECommerceDB>().AddDefaultTokenProviders();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IProductOrdersRepository, ProductOrdersRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
         }
 

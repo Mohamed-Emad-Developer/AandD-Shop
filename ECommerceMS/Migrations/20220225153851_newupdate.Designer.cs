@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceMS.Migrations
 {
     [DbContext(typeof(ECommerceDB))]
-    [Migration("20220224195030_InitialModels")]
-    partial class InitialModels
+    [Migration("20220225153851_newupdate")]
+    partial class newupdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,8 +186,17 @@ namespace ECommerceMS.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("CustomerAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerPhone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -266,6 +275,9 @@ namespace ECommerceMS.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("OrderNum")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId", "OrderNum");

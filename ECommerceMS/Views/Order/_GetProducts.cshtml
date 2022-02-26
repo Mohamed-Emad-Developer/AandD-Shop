@@ -1,0 +1,37 @@
+﻿@model Order
+<div class="col-12 card text-center">
+    <div class="card-header text-muted">
+        @Model.Customer.User.Name<span>/ products</span>
+        <div>@Model.Date</div>
+    </div>
+    <div class="card-body p-1 m-1">
+        @foreach(var product in Model.ProductOrders)
+        {
+        <div class="card">
+            <div style="display:flex; flex:1 1 auto">
+                <div class="img-square-wrapper">
+                    <img  src="/Images/@product.Product.Image" alt="Card image cap" class="rounded-circle mb-3" style="width:65px;">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">@product.Product.Name</h4>
+                    <p class="card-text text-break">@product.Product.Description</p>
+                    <p class="card-text">
+                        <div>
+                            <span>Size: </span>@product.Product.Size
+                        </div>
+                        <div>
+                            <span>Quantity: </span>@product.Quantity
+                        </div>
+                        <div>
+                            <span>Price: </span>@product.Product.Price
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="card-footer">
+        <span>Total: </span>@Model.Cost
+    </div>
+</div>

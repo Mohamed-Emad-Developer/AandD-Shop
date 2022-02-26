@@ -1,0 +1,53 @@
+﻿@using ECommerceMS.ViewModel
+@model OrderDetailsViewModel
+<div class="row">
+    <div class="col-6">
+        <form method="post" asp-action="ConfirmOrder" asp-controller="Order">
+            <input type="hidden" asp-for="CartID" class="form-control" />
+            <input type="hidden" asp-for="TotalCost" class="form-control" />
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Adress" class="form-label"></label>
+                <input asp-for="Adress" class="form-control" />
+                <span class="text-danger" asp-validation-for="Adress"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Phone" class="form-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span class="text-danger" asp-validation-for="Phone"></span>
+            </div>
+            <input type="submit" value="Confirm Order" class="btn btn-danger" />
+        </form>
+    </div>
+    <div class="col-6 card text-center">
+        <div class="card-header">
+            Order Summry
+        </div>
+        <div class="card-body">
+            @foreach(var item in ViewBag.ProductCart)
+            {
+            <div class="card">
+                <div style="display:flex; flex:1 1 auto">
+                    <div class="img-square-wrapper">
+                        <img  src="/Images/@item.Product.Image" alt="Card image cap" class="rounded-circle mb-3" style="width:65px;">
+                    </div>
+                    <div class="card-body p-1 m-1">
+                        <h4 class="card-title">@item.Product.Name</h4>
+                        <p class="card-text text-break">@item.Product.Description</p>
+                        <p class="card-text"><span>Size: </span>@item.Product.Size</p>
+                        <p class="card-text"><span>Quantity: </span>@item.Quantity</p>
+                        <p class="card-text text-danger"><span>Price: </span>@item.Product.Price</p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div> 
+        <div class="card-footer text-muted">
+           <span>Total: </span> @Model.TotalCost
+        </div>
+    </div>
+</div>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ECommerceMS.Migrations
 {
-    public partial class InitialModels : Migration
+    public partial class newupdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -244,6 +244,9 @@ namespace ECommerceMS.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -313,7 +316,8 @@ namespace ECommerceMS.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    OrderNum = table.Column<int>(type: "int", nullable: false)
+                    OrderNum = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

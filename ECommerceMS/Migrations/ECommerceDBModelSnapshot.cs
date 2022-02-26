@@ -184,8 +184,17 @@ namespace ECommerceMS.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("CustomerAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerPhone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -264,6 +273,9 @@ namespace ECommerceMS.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("OrderNum")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId", "OrderNum");

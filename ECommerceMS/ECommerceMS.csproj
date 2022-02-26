@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Images\Products\**" />
+    <Content Remove="wwwroot\Images\Products\**" />
+    <EmbeddedResource Remove="wwwroot\Images\Products\**" />
+    <None Remove="wwwroot\Images\Products\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.14">
@@ -15,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\Products\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
