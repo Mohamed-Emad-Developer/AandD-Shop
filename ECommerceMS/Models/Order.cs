@@ -11,6 +11,9 @@ namespace ECommerceMS.Models
         public int OrderNum { get; set; }
         public decimal Cost { get; set; }
         public DateTime Date { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CustomerPhone { get; set; }
 
         [ForeignKey("Customer")]
         public string CustomerId { get; set; }
