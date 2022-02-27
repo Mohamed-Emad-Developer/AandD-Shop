@@ -72,6 +72,49 @@ namespace ECommerceMS.Controllers
             return View(customer);
         }
 
+        public IActionResult Login(string returnUrl)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel login, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(login.Email);
+                if(user != null)
+                {
+                    Microsoft.AspNetCore.Identity.SignInResult result =
+                       await _signInManager.PasswordSignInAsync
+                       (user, login.Password, login.RememberMe, false);
+                    if (result.Succeeded)
+                    {
+                        if (await _userManager.IsInRoleAsync(user, "Customer"))
+                        {
+                            returnUrl = returnUrl == null ? $"/Home/Index" : returnUrl;
+                            return LocalRedirect(returnUrl);
+
+                        }
+                        else if (await _userManager.IsInRoleAsync(user, "Admin"))
+                        {
+                            returnUrl = returnUrl == null ? "/Admin/Index" : returnUrl;
+                            return LocalRedirect(returnUrl);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Email and Password are not valid");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Email and Password are not valid");
+                }
+            }
+            ViewData["ReturnUrl"] = returnUrl;
+            return View(login);
+        }
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

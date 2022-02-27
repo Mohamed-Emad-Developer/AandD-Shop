@@ -1,8 +1,168 @@
-﻿@{
+﻿@using ECommerceMS.ViewModel
+@model HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
+@section Style{
+    <link rel="stylesheet" href="~/css/home.css"/>
+}
+<div id="categories" class="categories">
+    <section>
+        <h1 class="text-capitalize fw-bold text-center sec-header">
+            Categories
+        </h1>
+        <div class="container">
+            <div class="categories-content">
+                <div class="row">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <div class="col-md-4">
+                            <div class="category">
+                                <div class="category-img">
+                                    <img src="img/@category.Image" alt="" />
+                                </div>
+                                <h4 class="fw-bold">@category.Title</h4>
+                            </div>
+                        </div>
+                    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
+
+  <!-- start product slider -->
+    <div id="products" class="product-slider p-5 mb-5">
+      <section>
+        <div class="container slider-container">
+          <h1 class="text-capitalize fw-bold text-center sec-header">
+            ower products
+          </h1>
+          <div class="row">
+            <div class="col-lg-4 col-sm-6 col-12 mb-5">
+              <div class="product-card">
+                <div class="product-label product-offer">10% off</div>
+                <div class="product-img">
+                  <div class="img-overlay">
+                    <a href="" class="text-white">
+                      <i class="far fa-eye"></i
+                    ></a>
+                  </div>
+                  <img src="img/phone.png" alt="" />
+                </div>
+                <div class="product-info">
+                  <div class="product-name">
+                    Samsung Galaxy A52s, 128GB, 8GB RAM, 5G - Awesome Black -
+                    Mobiles & Tablets
+                  </div>
+                  <span class="fw-bold">EGP 18,000</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5">
+              <div class="product-card">
+                <div class="product-label product-new">new</div>
+                <div class="product-img">
+                  <div class="img-overlay">
+                    <a href="" class="text-white">
+                      <i class="far fa-eye"></i
+                    ></a>
+                  </div>
+                  <img src="img/phone.png" alt="" />
+                </div>
+                <div class="product-info">
+                  <div class="product-name">
+                    Samsung Galaxy A52s, 128GB, 8GB RAM, 5G - Awesome Black -
+                    Mobiles & Tablets
+                  </div>
+                  <span class="fw-bold">EGP 18,000</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5">
+              <div class="product-card">
+                <div class="product-label product-offer">10% off</div>
+                <div class="product-img">
+                  <div class="img-overlay">
+                    <a href="" class="text-white">
+                      <i class="far fa-eye"></i
+                    ></a>
+                  </div>
+                  <img src="img/phone.png" alt="" />
+                </div>
+                <div class="product-info">
+                  <div class="product-name">
+                    Samsung Galaxy A52s, 128GB, 8GB RAM, 5G - Awesome Black -
+                    Mobiles & Tablets
+                  </div>
+                  <span class="fw-bold">EGP 18,000</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5">
+              <div class="product-card">
+                <div class="product-label product-offer">10% off</div>
+                <div class="product-img">
+                  <div class="img-overlay">
+                    <a href="" class="text-white">
+                      <i class="far fa-eye"></i
+                    ></a>
+                  </div>
+                  <img src="img/phone.png" alt="" />
+                </div>
+                <div class="product-info">
+                  <div class="product-name">
+                    Samsung Galaxy A52s, 128GB, 8GB RAM, 5G - Awesome Black -
+                    Mobiles & Tablets
+                  </div>
+                  <span class="fw-bold">EGP 18,000</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5">
+              <div class="product-card">
+                <div class="product-label product-offer">10% off</div>
+                <div class="product-img">
+                  <div class="img-overlay">
+                    <a href="" class="text-white">
+                      <i class="far fa-eye"></i
+                    ></a>
+                  </div>
+                  <img src="img/phone.png" alt="" />
+                </div>
+                <div class="product-info">
+                  <div class="product-name">
+                    Samsung Galaxy A52s, 128GB, 8GB RAM, 5G - Awesome Black -
+                    Mobiles & Tablets
+                  </div>
+                  <span class="fw-bold">EGP 18,000</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5">
+              <div class="product-card">
+                <div class="product-label product-offer">10% off</div>
+                <div class="product-img">
+                  <div class="img-overlay">
+                    <a href="" class="text-white">
+                      <i class="far fa-eye"></i
+                    ></a>
+                  </div>
+                  <img src="img/phone.png" alt="" />
+                </div>
+                <div class="product-info">
+                  <div class="product-name">
+                    Samsung Galaxy A52s, 128GB, 8GB RAM, 5G - Awesome Black -
+                    Mobiles & Tablets
+                  </div>
+                  <span class="fw-bold">EGP 18,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- end product slider -->

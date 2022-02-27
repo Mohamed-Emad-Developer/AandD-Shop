@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using ECommerceMS.services.repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerceMS.Controllers
 {
@@ -23,6 +24,11 @@ namespace ECommerceMS.Controllers
         {
             List<Product> product = ProductRepository.GetAll();
             return View(product);
+        }
+        public IActionResult GetAllProductsForCustomer()
+        {
+            List<Product> product = ProductRepository.GetAll();
+            return View("AllProducts", product);
         }
 
         public IActionResult Details(int id)
@@ -90,7 +96,7 @@ namespace ECommerceMS.Controllers
             ViewData["Categories"] = category;
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles ="Customer")]
         public IActionResult FavouriteProducts()
         {
 

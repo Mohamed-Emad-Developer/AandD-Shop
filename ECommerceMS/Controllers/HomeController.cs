@@ -1,4 +1,7 @@
 ﻿using ECommerceMS.Models;
+using ECommerceMS.services;
+using ECommerceMS.services.repository;
+using ECommerceMS.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +15,23 @@ namespace ECommerceMS.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        public HomeController(ILogger<HomeController> logger, IProductRepository productRepository , ICategoryRepository categoryRepository)
         {
             _logger = logger;
+            _productRepository = productRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var homevm = new HomeViewModel()
+            {
+                Products = _productRepository.GetAll(),
+                Categories = _categoryRepository.GetAll()
+            };
+            return View(homevm);
         }
 
         public IActionResult Privacy()

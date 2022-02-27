@@ -21,6 +21,11 @@ namespace ECommerceMS.Controllers
             categoryRepository = _ctgRepo;
             this._hostEnv = hostEnv;
         }
+        public IActionResult GetAllCategoriesForCustomer()
+        {
+            List<Category> CtgModel = categoryRepository.GetAll();
+            return View("AllCategories", CtgModel);
+        }
 
         //Get All Catgories
         public IActionResult Index()
