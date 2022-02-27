@@ -47,6 +47,14 @@ namespace ECommerceMS.Controllers
             return View(product);
         }
 
+        public IActionResult CustomerDetails(int id)
+        {
+            Product product = ProductRepository.GetById(id);
+            List<Category> category = CategoryRepository.GetAll();
+            ViewData["Categories"] = category;
+            return View(product);
+        }
+
         public IActionResult Create()
         {
             List<Category> category = CategoryRepository.GetAll();
@@ -160,14 +168,8 @@ namespace ECommerceMS.Controllers
         [Authorize(Roles = "Customer")]
         public IActionResult FavouriteProducts()
         {
-
             var products = ProductRepository.GetFavouriteProducts(userManager.GetUserId(User));
             return View(products);
-
         }
-
-
-
-
     }
 }
