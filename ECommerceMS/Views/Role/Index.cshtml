@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ECommerceMS.ViewModel.RoleViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AddRole">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @*  <th>
+                @Html.DisplayNameFor(model => model.ID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.RoleName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*  <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditRole", new {  id=item.ID  }) |
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                    @Html.ActionLink("Delete", "DeleteRole","Role", new {  id=item.ID  },htmlAttributes:new{@class="delete-item"})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script src="~/js/main.js"></script>
+}

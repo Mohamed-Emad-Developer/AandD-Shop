@@ -66,6 +66,12 @@
 <hr />
 <form asp-action="Delete">
     <input type="hidden" asp-for="Id" />
-    <input type="submit" value="Delete Product" class="btn btn-danger" />
+    <input type="submit" value="Delete Product" class="btn btn-danger delete-item" />
     <a asp-action="Index" class="btn btn-secondary">Back to Products</a>
 </form>
+
+
+
+@section Scripts{
+    <script src="~/js/main.js">/*delete-item*/</script>
+}

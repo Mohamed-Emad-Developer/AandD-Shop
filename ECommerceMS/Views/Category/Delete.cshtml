@@ -16,7 +16,11 @@
                     </div>
                </div>
     <form asp-action="Delete">
-        <input type="submit" value="Delete Category" class="btn btn-danger" />
+        <input type="submit" value="Delete Category" class="btn btn-danger delete-item" />
         <a asp-action="Index" class="btn btn-secondary ">Back to List</a>
     </form>
 </div>
+
+@section Scripts{
+    <script src="~/js/main.js">/*delete-item*/</script>
+}
