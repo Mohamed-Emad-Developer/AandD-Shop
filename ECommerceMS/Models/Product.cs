@@ -1,5 +1,7 @@
 ﻿using ECommerceMS.enums;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerceMS.Models
@@ -8,7 +10,11 @@ namespace ECommerceMS.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
         public string Image { get; set; }
+        [Display(Name ="Upload File")]
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
         public string Description { get; set; }
         public Size Size { get; set; }
         public Color Color { get; set; }

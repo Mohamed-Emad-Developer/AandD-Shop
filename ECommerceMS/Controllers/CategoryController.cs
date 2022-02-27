@@ -15,11 +15,12 @@ namespace ECommerceMS.Controllers
     {
         readonly ICategoryRepository categoryRepository;
         private readonly IWebHostEnvironment _hostEnv;
-
-        public CategoryController(ICategoryRepository _ctgRepo, IWebHostEnvironment hostEnv)
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public CategoryController(ICategoryRepository _ctgRepo, IWebHostEnvironment hostEnv, IWebHostEnvironment hostEnvironment)
         {
             categoryRepository = _ctgRepo;
             this._hostEnv = hostEnv;
+            _hostEnvironment = hostEnvironment;
         }
         public IActionResult GetAllCategoriesForCustomer()
         {
@@ -57,10 +58,23 @@ namespace ECommerceMS.Controllers
 
         // Save Catgory
         [HttpPost]
-        public IActionResult Create(Category newCtg)
+        public async Task<IActionResult> Create(Category newCtg)
         {
             if (ModelState.IsValid == true)
             {
+                if (newCtg.ImageFile != null)
+                {
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(newCtg.ImageFile.FileName);
+                    string extension = Path.GetExtension(newCtg.ImageFile.FileName);
+                    newCtg.Image = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    string path = Path.Combine(wwwRootPath + "/Images/Categories/"
+                        , fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await newCtg.ImageFile.CopyToAsync(fileStream);
+                    }
+                }
                 categoryRepository.Create(newCtg);
                 return RedirectToAction("Index");
             }
@@ -97,6 +111,17 @@ namespace ECommerceMS.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult ConfirmeDelete(int id)
         {
+            var ctg = categoryRepository.GetById(id);
+            if (ctg.Image != null)
+            {
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string path = Path.Combine(wwwRootPath + "/Images/Categories/", ctg.Image);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+
+                }
+            }
             categoryRepository.Delete(id);
             return RedirectToAction("Index");
         }

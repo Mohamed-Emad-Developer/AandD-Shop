@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\Images\Products\**" />
-    <Content Remove="wwwroot\Images\Products\**" />
-    <EmbeddedResource Remove="wwwroot\Images\Products\**" />
-    <None Remove="wwwroot\Images\Products\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Role\AddRole.cshtml" />
     <None Include="Views\Role\EditRole.cshtml" />
     <None Include="Views\Role\Index.cshtml" />
@@ -1700,6 +1693,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\products\" />
   </ItemGroup>
 
 </Project>
