@@ -1,5 +1,6 @@
 ﻿using ECommerceMS.Models;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ECommerceMS.ViewModel
 {
@@ -10,7 +11,7 @@ namespace ECommerceMS.ViewModel
         public string Phone { get; set; }
         public List<Product> products { get; set; }
         public int CartID { get; set; }
-        
+
         public decimal TotalCost { get; set; }
     }
 }
