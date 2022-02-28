@@ -2,43 +2,43 @@
 @section Style{
     <style>
         .zoom {
-          transition: transform .2s;
-          margin: 0 auto;
+            transition: transform .2s;
+            margin: 0 auto;
         }
 
         .zoom:hover {
-          -ms-transform: scale(1.5); /* IE 9 */
-          -webkit-transform: scale(1.5); /* Safari 3-8 */
-          transform: scale(1.5); 
+            -ms-transform: scale(1.5); /* IE 9 */
+            -webkit-transform: scale(1.5); /* Safari 3-8 */
+            transform: scale(1.5); 
         }
-     .cardanimation {
-        height: 215px;
-        margin: 30px 10px;
-        padding: 20px 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-        transition: 0.3s ease-in-out
-}
-    .cardanimation:hover {
-        height: auto
+        .cardanimation {
+            height: 215px;
+            margin: 30px 10px;
+            padding: 20px 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            transition: 0.3s ease-in-out
         }
-
-      .test {
-        position: relative;
-        margin-top: -140px;
-        padding: 10px 15px;
-        text-align: center;
-        color: #111;
-        visibility: hidden;
-        opacity: 0;
-        pointer-events: none;
-        transition: 0.3s ease-in-out
+        .cardanimation:hover {
+            height: auto
         }
 
-     .cardanimation:hover  .test{
-        visibility: visible;
-        opacity: 10;
-        margin-top: -40px;
-        transition-delay: 0.3s
+        .test {
+            position: relative;
+            margin-top: -140px;
+            padding: 10px 15px;
+            text-align: center;
+            color: #111;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s ease-in-out
+        }
+
+        .cardanimation:hover  .test{
+            visibility: visible;
+            opacity: 10;
+            margin-top: -40px;
+            transition-delay: 0.3s
         }
     </style>
 }
@@ -83,7 +83,7 @@
                                             <div class="card">
                                                 <div style="display:flex; flex:1 1 auto">
                                                     <div class="img-square-wrapper img-fluid zoom">
-                                                        <img  src="/Images/@product.Product.Image" alt="Card image cap" class="rounded-circle" style="width:65px;">
+                                                        <img  src="~/Images/Products/@product.Product.Image" alt="Card image cap" class="rounded-circle" style="width:65px;">
                                                     </div>
                                                     <div class="card-body">
                                                         <h4 class="card-title">@product.Product.Name</h4>

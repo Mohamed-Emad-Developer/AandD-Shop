@@ -1,7 +1,7 @@
 ﻿@model Order
 <div class="col-12 card text-center">
     <div class="card-header text-success font-weight-bold">
-        @Model.Customer.User.Name<span>/ products</span>
+        @Model.CustomerName<span>/ products</span>
         <div>@Model.Date</div>
     </div>
     <div class="card-body p-1 m-1">
@@ -10,7 +10,7 @@
         <div class="card zoom">
             <div style="display:flex; flex:1 1 auto">
                 <div class="img-square-wrapper img-fluid zoom">
-                    <img  src="/Images/@product.Product.Image" alt="Card image cap" class="rounded-circle mb-3" style="width:65px;">
+                    <img  src="~/Images/Products/@product.Product.Image" alt="Card image cap" class="rounded-circle mb-3" style="width:65px;">
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">@product.Product.Name</h4>

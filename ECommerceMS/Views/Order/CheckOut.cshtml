@@ -3,17 +3,17 @@
 @section Style{
     <style>
         :root {
-             --main-color: #319E50;
-              }
+            --main-color: #319E50;
+        }
         .zoom {
-          transition: transform .2s;
-          margin: 0 auto;
+            transition: transform .2s;
+            margin: 0 auto;
         }
 
         .zoom:hover {
-          -ms-transform: scale(1.5); /* IE 9 */
-          -webkit-transform: scale(1.5); /* Safari 3-8 */
-          transform: scale(1.5); 
+            -ms-transform: scale(1.5); /* IE 9 */
+            -webkit-transform: scale(1.5); /* Safari 3-8 */
+            transform: scale(1.5); 
         }
     </style>
 }
@@ -50,7 +50,7 @@
             <div class="card">
                 <div style="display:flex; flex:1 1 auto">
                     <div class="img-square-wrapper img-fluid bg-image hover-zoom zoom">
-                        <img  src="/Images/@item.Product.Image" alt="Card image cap" class="rounded-circle" style="width:65px;">
+                        <img  src="~/Images/products/@item.Product.Image" alt="Card image cap" class="rounded-circle" style="width:65px;">
                     </div>
                     <div class="card-body p-1 m-1">
                         <h4 class="card-title">@item.Product.Name</h4>
