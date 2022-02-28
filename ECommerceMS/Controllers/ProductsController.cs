@@ -171,5 +171,16 @@ namespace ECommerceMS.Controllers
             var products = ProductRepository.GetFavouriteProducts(userManager.GetUserId(User));
             return View(products);
         }
+        public IActionResult AddToFavouriteList(int id)
+        {
+            ProductRepository.AddToFavouriteList(userManager.GetUserId(User), id);
+            return RedirectToAction("FavouriteProducts");
+        }
+        public IActionResult RemoveFromFavouriteList(int id)
+        {
+            ProductRepository.RemoveFromFavouriteList(userManager.GetUserId(User), id);
+            return RedirectToAction("FavouriteProducts");
+        }
+   
     }
 }
