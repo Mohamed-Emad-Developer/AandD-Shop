@@ -4,12 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>
+*@
 
-<p>
-    <a asp-action="AddRole">Create New</a>
-</p>
-<table class="table">
+<table class="table table-dark table-striped w-75 m-auto">
     <thead>
         <tr>
             @*  <th>
@@ -25,22 +23,37 @@
         @foreach (var item in Model)
         {
             <tr>
-                @*  <td>
-                    @Html.DisplayFor(modelItem => item.ID)
-                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.RoleName)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditRole", new {  id=item.ID  }) |
-                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                    @Html.ActionLink("Delete", "DeleteRole","Role", new {  id=item.ID  },htmlAttributes:new{@class="delete-item"})
+                <div class="test">
+                <td class="table-row">
+                    <button class="btn btn-success">
+                            @Html.ActionLink("Edit", "EditRole",
+                    new {  id=item.ID  },
+                    htmlAttributes:new{@class="edit-item"})
+                    </button>
+                    <button class="btn btn-danger">
+                            @Html.ActionLink("Delete", "DeleteRole","Role",
+                    new {  id=item.ID  },
+                    htmlAttributes:new{@class="delete-item"})
+                    </button>
                 </td>
+                </div>
             </tr>
         }
     </tbody>
 </table>
+<p class="text-center mt-2">
+    <button class="btn btn-success">
+        <a asp-action="AddRole" class="create">Create Role</a>
+    </button>
+</p>
 
 @section Scripts{
-    <script src="~/js/main.js"></script>
+<script src="~/js/main.js"></script>
+}
+
+@section Style {
+<link href="~/css/role.css" rel="stylesheet" type="text/css" />
 }

@@ -42,7 +42,7 @@
             <h1 class="text-capitalize fw-bold text-center sec-header">
                 ower products
             </h1>
-            <a asp-action="" asp-controller="" class="btn btn-success text-capitalize ms-3">show all product <i class="fas fa-angle-double-right"></i></a>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-success text-capitalize ms-3">show all product <i class="fas fa-angle-double-right"></i></a>
             <div class="row my-3">
                 @foreach (var product in Model.Products)
                 {

@@ -1,0 +1,30 @@
+/*Index Style*/
+
+
+.delete-item,
+.edit-item,
+a.create {
+    color: #fff;
+}
+
+.edit-item{
+    padding: 9px;
+}
+.edit-item:hover,
+.delete-item:hover{
+    color:#fff
+}
+
+td.table-row {
+    padding-left: 38%;
+}
+
+@media only screen and (max-width: 375px){
+    td.table-row {
+        padding-left: 0;
+    }
+}
+/*Index Style*/
+/*Add Role Style*/
+
+/*Add Role Style*/
