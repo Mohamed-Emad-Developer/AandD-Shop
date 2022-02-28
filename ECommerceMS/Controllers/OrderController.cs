@@ -68,6 +68,7 @@ namespace ECommerceMS.Controllers
             }
             else
             {
+                ViewData["ProductCart"] = cartRepository.Get(newOrder.CartID).ProductCarts.ToList();
                 return View("CheckOut",newOrder);
             }
         }

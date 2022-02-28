@@ -6,6 +6,8 @@ namespace ECommerceMS.ViewModel
 {
     public class OrderDetailsViewModel
     {
+        [Required(ErrorMessage = "name is required.")]
+        [RegularExpression("^[a-zA-Z_ ]*$", ErrorMessage = "name contains char, spaces only ")]
         public string Name { get; set; }
         public string Adress { get; set; }
         public string Phone { get; set; }

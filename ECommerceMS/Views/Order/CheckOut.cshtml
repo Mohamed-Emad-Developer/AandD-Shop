@@ -1,7 +1,24 @@
 ﻿@using ECommerceMS.ViewModel
 @model OrderDetailsViewModel
+@section style{
+    <style>
+        :root {
+             --main-color: #319E50;
+              }
+        .zoom {
+          transition: transform .2s;
+          margin: 0 auto;
+        }
+
+        .zoom:hover {
+          -ms-transform: scale(1.5); /* IE 9 */
+          -webkit-transform: scale(1.5); /* Safari 3-8 */
+          transform: scale(1.5); 
+        }
+    </style>
+}
 <div class="row">
-    <div class="col-6">
+    <div class="col-lg-6">
         <form method="post" asp-action="ConfirmOrder" asp-controller="Order">
             <input type="hidden" asp-for="CartID" class="form-control" />
             <input type="hidden" asp-for="TotalCost" class="form-control" />
@@ -20,11 +37,11 @@
                 <input asp-for="Phone" class="form-control" />
                 <span class="text-danger" asp-validation-for="Phone"></span>
             </div>
-            <input type="submit" value="Confirm Order" class="btn btn-danger" />
+            <input type="submit" value="Confirm Order" class="btn btn-success mb-3" />
         </form>
     </div>
-    <div class="col-6 card text-center">
-        <div class="card-header">
+    <div class="col-lg-6 card text-center">
+        <div class="card-header font-weight-bold text-muted">
             Order Summry
         </div>
         <div class="card-body">
@@ -32,22 +49,30 @@
             {
             <div class="card">
                 <div style="display:flex; flex:1 1 auto">
-                    <div class="img-square-wrapper">
-                        <img  src="/Images/@item.Product.Image" alt="Card image cap" class="rounded-circle mb-3" style="width:65px;">
+                    <div class="img-square-wrapper img-fluid bg-image hover-zoom zoom">
+                        <img  src="/Images/@item.Product.Image" alt="Card image cap" class="rounded-circle" style="width:65px;">
                     </div>
                     <div class="card-body p-1 m-1">
                         <h4 class="card-title">@item.Product.Name</h4>
                         <p class="card-text text-break">@item.Product.Description</p>
-                        <p class="card-text"><span>Size: </span>@item.Product.Size</p>
-                        <p class="card-text"><span>Quantity: </span>@item.Quantity</p>
-                        <p class="card-text text-danger"><span>Price: </span>@item.Product.Price</p>
+                        <p class="card-text">
+                            <div>
+                                <span class="font-weight-bold">Size: </span>@item.Product.Size
+                            </div>
+                            <div>
+                                <span class="font-weight-bold">Quantity: </span>@item.Quantity
+                            </div>
+                            <div>
+                                <span class="font-weight-bold text-success">Price: </span>@item.Product.Price $
+                            </div>
+                        </p>
                     </div>
                 </div>
             </div>
             }
         </div> 
-        <div class="card-footer text-muted">
-           <span>Total: </span> @Model.TotalCost
+        <div class="card-footer text-muted  text-center">
+           <span class="font-weight-bold">Total Cost: </span> @Model.TotalCost $
         </div>
     </div>
 </div>

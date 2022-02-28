@@ -1,13 +1,27 @@
 ﻿@model List<Order>
+@section style{
+    <style>
+        .zoom {
+          transition: transform .2s;
+          margin: 0 auto;
+        }
+
+        .zoom:hover {
+          -ms-transform: scale(1.1); /* IE 9 */
+          -webkit-transform: scale(1.1); /* Safari 3-8 */
+          transform: scale(1.1); 
+        }
+    </style>
+}
 <div class="row">
-    <div class="col-6 card text-center">
+    <div class="col-lg-6 card text-center mb-3">
         <div class="card-header">
             AllOrders
         </div>
         <div class="card-body">
             @foreach(var item in Model)
             {
-            <div class="card">
+            <div class="card zoom">
                 <div style="display:flex; flex:1 1 auto">
                     <div class="card-body p-1 m-1">                        
                         <p class="Card-text">
@@ -24,7 +38,7 @@
                                 <span> ordered at : </span>@item.Date
                             </div>
                             <div class="m-2">
-                                <input type="button" onclick="AjaxCall('@item.OrderNum')" value="products" class="btn btn-danger"/>
+                                <button onclick="AjaxCall('@item.OrderNum')" value="products" class="btn btn-danger"><a class="text-light text-decoration-none" href="#div1">product</a></button>
                             </div>
                         </p>
                     </div>
@@ -35,7 +49,7 @@
         <div class="card-footer text-muted"> 
         </div>
     </div>
-    <div class="col-6" id="div1">        
+    <div class="col-lg-6 zoom" id="div1">        
     </div>
 </div>
 @section Scripts{

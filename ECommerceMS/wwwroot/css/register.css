@@ -1,0 +1,38 @@
+﻿:root {
+    --main-color: #319E50;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height:100vh;
+}
+.register-container {
+    box-shadow: 0 0 10px 3px #ddd;
+}
+.register-form {
+    background: var(--main-color);
+    padding: 100px 10px;
+}
+
+    .register-form label {
+        color: white;
+    }
+
+    .register-form input {
+        width: 100%;
+    }
+
+.shop-img img {
+    max-width: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.shop-img {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

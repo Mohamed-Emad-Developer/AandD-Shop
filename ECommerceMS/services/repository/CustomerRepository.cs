@@ -13,6 +13,14 @@ namespace ECommerceMS.services.repository
         {
             DBContext = _DBContext;
         }
+
+        public int Create(Customer customer)
+        {
+            DBContext.Customers.Add(customer);
+            int rows = DBContext.SaveChanges();
+            return rows;
+        }
+
         public Customer Get(string id)
         {
             return DBContext.Customers.Include(x => x.User).FirstOrDefault(x => x.Id == id);

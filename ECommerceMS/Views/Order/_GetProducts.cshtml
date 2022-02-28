@@ -1,6 +1,6 @@
 ﻿@model Order
 <div class="col-12 card text-center">
-    <div class="card-header text-muted">
+    <div class="card-header text-muted font-weight-bold">
         @Model.Customer.User.Name<span>/ products</span>
         <div>@Model.Date</div>
     </div>
@@ -9,7 +9,7 @@
         {
         <div class="card">
             <div style="display:flex; flex:1 1 auto">
-                <div class="img-square-wrapper">
+                <div class="img-square-wrapper img-fluid zoom">
                     <img  src="/Images/@product.Product.Image" alt="Card image cap" class="rounded-circle mb-3" style="width:65px;">
                 </div>
                 <div class="card-body">
@@ -17,13 +17,13 @@
                     <p class="card-text text-break">@product.Product.Description</p>
                     <p class="card-text">
                         <div>
-                            <span>Size: </span>@product.Product.Size
+                            <span class="font-weight-bold">Size: </span>@product.Product.Size
                         </div>
                         <div>
-                            <span>Quantity: </span>@product.Quantity
+                            <span class="font-weight-bold">Quantity: </span>@product.Quantity
                         </div>
                         <div>
-                            <span>Price: </span>@product.Product.Price
+                            <span class="font-weight-bold">Price: </span>@product.Product.Price$
                         </div>
                     </p>
                 </div>
@@ -32,6 +32,6 @@
         }
     </div>
     <div class="card-footer">
-        <span>Total: </span>@Model.Cost
+        <span class="text-muted font-weight-bold">TotalCost: </span>@Model.Cost$
     </div>
 </div>
