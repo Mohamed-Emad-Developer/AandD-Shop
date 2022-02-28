@@ -3,14 +3,13 @@ using ECommerceMS.services;
 using ECommerceMS.services.repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
- 
+
 namespace ECommerceMS.Controllers
 {
     public class ProductsController : Controller
@@ -33,7 +32,8 @@ namespace ECommerceMS.Controllers
             List<Product> product = ProductRepository.GetAll();
             return View(product);
         }
-        public IActionResult GetAllProductsForCustomer()
+
+        public IActionResult GetAllProductsForAdmin()
         {
             List<Product> product = ProductRepository.GetAll();
             return View("AllProducts", product);

@@ -7,9 +7,6 @@
 <hr id="scroll"/>
 <h2 style="text-align:center;font-family:'Courgette',cursive;font-size:50px">Products</h2>
 <hr />
-<p>
-    <a asp-action="Create" class ="btn btn-primary" style="margin:10px;color:white">Create New Product</a>
-</p>
 
 <div class="container">
     <div class="row">
@@ -25,7 +22,7 @@
                     <div class="card-body" style="text-align: center;">
                         <h4>@item.Name</h4>
                         <h4>@item.Price $</h4>
-                        <a asp-action="Details" asp-route-id="@item.Id" class ="btn btn-secondary w-100">Details</a>
+                        <a asp-action="CustomerDetails" asp-route-id="@item.Id" class ="btn btn-secondary w-100">Details</a>
                     </div>
                 </div>
                  <br>
