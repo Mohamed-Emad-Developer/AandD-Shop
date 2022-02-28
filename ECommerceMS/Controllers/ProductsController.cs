@@ -27,16 +27,16 @@ namespace ECommerceMS.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index()// view for get all products to customer
         {
             List<Product> product = ProductRepository.GetAll();
             return View(product);
         }
 
-        public IActionResult GetAllProductsForAdmin()
+        public IActionResult GetAllProductsForAdmin()// view for get all products to admin
         {
             List<Product> product = ProductRepository.GetAll();
-            return View("AllProducts", product);
+            return View("GetAllProducts", product);
         }
 
         public IActionResult Details(int id)
@@ -47,7 +47,7 @@ namespace ECommerceMS.Controllers
             return View(product);
         }
 
-        public IActionResult CustomerDetails(int id)
+        public IActionResult CustomerDetails(int id) //view for productDetails to customer
         {
             Product product = ProductRepository.GetById(id);
             List<Category> category = CategoryRepository.GetAll();
