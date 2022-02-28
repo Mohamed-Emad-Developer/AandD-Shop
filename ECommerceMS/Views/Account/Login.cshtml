@@ -1,0 +1,82 @@
+﻿@model ECommerceMS.ViewModel.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link href="~/css/register.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="register-container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="register-form">
+                        <h1 class="text-center text-white text-uppercase">Login</h1>
+                        <form asp-action="Login" asp-controller="Account" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                              <input hidden name="ReturnUrl" value="@ViewBag.ReturnUrl" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label asp-for="Email" class="control-label"></label>
+                                        <input asp-for="Email" class="form-control w-100" placeholder="Enter email" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label asp-for="Password" class="control-label"></label>
+                                        <input asp-for="Password" class="form-control w-100" placeholder="Enter password" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class=" ">
+                                            <input asp-for="RememberMe" class="d-inline-block" />
+                                            <label asp-for="RememberMe" class="d-inline-block"></label>
+                                        </div>
+                                        <span asp-validation-for="RememberMe" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" value="Login" class="btn btn-success" />
+
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6 d-sm-block bg-white d-none">
+                    <div class="shop-img">
+                        <img src="/Images/site/shop.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+</body>
+</html>

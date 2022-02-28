@@ -1,6 +1,7 @@
 ﻿using ECommerceMS.Data;
 using ECommerceMS.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +17,7 @@ namespace ECommerceMS.services.repository
         }
         public List<Category> GetAll()
         {
-            return context.Categories.ToList();
+            return context.Categories.Include(c=>c.Products).ToList();
         }
         
         public List<Category> GetAllSearch(string searchString)

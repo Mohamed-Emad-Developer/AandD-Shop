@@ -1,5 +1,5 @@
 ﻿@model List<Order>
-@section style{
+@section Style{
     <style>
         .zoom {
           transition: transform .2s;
@@ -15,7 +15,7 @@
 }
 <div class="row">
     <div class="col-lg-6 card text-center mb-3">
-        <div class="card-header">
+        <div class="card-header text-success font-weight-bold">
             AllOrders
         </div>
         <div class="card-body">
@@ -26,19 +26,19 @@
                     <div class="card-body p-1 m-1">                        
                         <p class="Card-text">
                             <div>
-                                <span>Name : </span> @item.CustomerName
+                                <span class="text-success font-weight-bold">Name : </span> @item.CustomerName
                             </div>
                             <div>
-                                <span> Adress : </span>@item.CustomerAddress
+                                <span class="text-success font-weight-bold" > Adress : </span>@item.CustomerAddress
                             </div>  
                             <div>
-                                <span> Phone : </span>@item.CustomerPhone
+                                <span class="text-success font-weight-bold"> Phone : </span>@item.CustomerPhone
                             </div>
                             <div>
-                                <span> ordered at : </span>@item.Date
+                                <span class="text-success font-weight-bold" font> ordered at : </span>@item.Date
                             </div>
                             <div class="m-2">
-                                <button onclick="AjaxCall('@item.OrderNum')" value="products" class="btn btn-danger"><a class="text-light text-decoration-none" href="#div1">product</a></button>
+                                <button onclick="AjaxCall('@item.OrderNum')" value="products" class="btn btn-success"><a class="text-light text-decoration-none" href="#div1">product</a></button>
                             </div>
                         </p>
                     </div>
@@ -46,10 +46,10 @@
             </div>
             }
         </div> 
-        <div class="card-footer text-muted"> 
+        <div class="card-footer font-weight-bold text-muted"> 
         </div>
     </div>
-    <div class="col-lg-6 zoom" id="div1">        
+    <div class="col-lg-6 " id="div1">        
     </div>
 </div>
 @section Scripts{

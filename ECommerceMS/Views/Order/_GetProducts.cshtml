@@ -1,13 +1,13 @@
 ﻿@model Order
 <div class="col-12 card text-center">
-    <div class="card-header text-muted font-weight-bold">
+    <div class="card-header text-success font-weight-bold">
         @Model.Customer.User.Name<span>/ products</span>
         <div>@Model.Date</div>
     </div>
     <div class="card-body p-1 m-1">
         @foreach(var product in Model.ProductOrders)
         {
-        <div class="card">
+        <div class="card zoom">
             <div style="display:flex; flex:1 1 auto">
                 <div class="img-square-wrapper img-fluid zoom">
                     <img  src="/Images/@product.Product.Image" alt="Card image cap" class="rounded-circle mb-3" style="width:65px;">
@@ -17,13 +17,13 @@
                     <p class="card-text text-break">@product.Product.Description</p>
                     <p class="card-text">
                         <div>
-                            <span class="font-weight-bold">Size: </span>@product.Product.Size
+                            <span class="text-success font-weight-bold">Size: </span>@product.Product.Size
                         </div>
                         <div>
-                            <span class="font-weight-bold">Quantity: </span>@product.Quantity
+                            <span class="text-success font-weight-bold">Quantity: </span>@product.Quantity
                         </div>
                         <div>
-                            <span class="font-weight-bold">Price: </span>@product.Product.Price$
+                            <span class="text-success font-weight-bold">Price: </span>@product.Product.Price$
                         </div>
                     </p>
                 </div>
@@ -32,6 +32,6 @@
         }
     </div>
     <div class="card-footer">
-        <span class="text-muted font-weight-bold">TotalCost: </span>@Model.Cost$
+        <span class=" text-success font-weight-bold">TotalCost: </span>@Model.Cost$
     </div>
 </div>

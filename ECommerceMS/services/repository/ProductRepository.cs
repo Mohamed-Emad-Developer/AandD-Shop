@@ -54,9 +54,9 @@ namespace ECommerceMS.services
             int raw = DBContext.SaveChanges();
             return raw;
         }
-        public List<FavouriteList> GetFavouriteProducts(string customerId)
+        public List<Product> GetFavouriteProducts(string customerId)
         {
-            var products = DBContext.FavouriteLists.Where(f => f.CustomerId ==  customerId).ToList();
+            var products = DBContext.FavouriteLists.Where(f => f.CustomerId ==  customerId).Select(f=>f.Product).ToList();
             return products;
         }
     }

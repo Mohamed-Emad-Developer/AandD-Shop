@@ -26,4 +26,7 @@
 </table>
   <a asp-action="Index" class = "btn btn-secondary">Back to List</a>
 <hr />
-
+@foreach(var product in Model.Products)
+{
+    <p>@product.Name</p>
+}

@@ -1,12 +1,13 @@
 ﻿:root {
     --main-color: #319E50;
 }
+
 body {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height:100vh;
+    height: 100vh;
 }
 .register-container {
     box-shadow: 0 0 10px 3px #ddd;

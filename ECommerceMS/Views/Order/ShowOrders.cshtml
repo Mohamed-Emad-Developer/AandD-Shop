@@ -1,5 +1,5 @@
 ﻿@model List<Order>
-@section style{
+@section Style{
     <style>
         .zoom {
           transition: transform .2s;
@@ -44,7 +44,7 @@
 }
 <div class="row">
     <div class="col-lg-12 card text-center">
-        <div class="card-header">
+        <div class="card-header text-success font-weight-bold">
             AllOrders
         </div>
         <div class="card-body">
@@ -55,16 +55,16 @@
                     <div class="card-body p-1 m-1">                        
                         <p class="Card-text">
                             <div>
-                                <span>Customer : </span> @item.CustomerName
+                                <span class="text-success font-weight-bold">Customer : </span> @item.CustomerName
                             </div>
                             <div>
-                                <span> Adress : </span>@item.CustomerAddress
+                                <span class="text-success font-weight-bold"> Adress : </span>@item.CustomerAddress
                             </div>  
                             <div>
-                                <span> Phone : </span>@item.CustomerPhone
+                                <span class="text-success font-weight-bold"> Phone : </span>@item.CustomerPhone
                             </div>
                             <div>
-                                <span> ordered at : </span>@item.Date
+                                <span class="text-success font-weight-bold"> ordered at : </span>@item.Date
                             </div>
                             <div class="m-2">
                                 @*<input type="button" onclick="AjaxCall('@item.OrderNum')" value="products" class="btn btn-danger"/>*@
@@ -74,7 +74,7 @@
                         <div>
                            <div class="row m-2 test">
                                <div class="col-12 card text-center">
-                                   <div class="card-header font-weight-bold text-muted">
+                                   <div class="card-header text-success font-weight-bold">
                                         products 
                                    </div>
                                    <div class="card-body p-1 m-1">
@@ -83,20 +83,20 @@
                                             <div class="card">
                                                 <div style="display:flex; flex:1 1 auto">
                                                     <div class="img-square-wrapper img-fluid zoom">
-                                                        <img  src="/Images/@product.Product.Image" alt="Card image cap" class="rounded-circle mb-3" style="width:65px;">
+                                                        <img  src="/Images/@product.Product.Image" alt="Card image cap" class="rounded-circle" style="width:65px;">
                                                     </div>
                                                     <div class="card-body">
                                                         <h4 class="card-title">@product.Product.Name</h4>
                                                         <p class="card-text text-break">@product.Product.Description</p>
                                                         <p class="card-text">
                                                             <div>
-                                                                <span class="font-weight-bold">Size: </span>@product.Product.Size
+                                                                <span class="text-success font-weight-bold">Size: </span>@product.Product.Size
                                                             </div>
                                                             <div>
-                                                                <span class="font-weight-bold">Quantity: </span>@product.Quantity
+                                                                <span class="text-success font-weight-bold">Quantity: </span>@product.Quantity
                                                             </div>
                                                             <div>
-                                                                <span class="font-weight-bold">Price: </span>@product.Product.Price
+                                                                <span class="text-success font-weight-bold">Price: </span>@product.Product.Price
                                                             </div>
                                                         </p>
                                                     </div>
@@ -105,7 +105,7 @@
                                         }
                                    </div>
                                    <div class="card-footer">
-                                       <span class="font-weight-bold">Total Cost: </span>@item.Cost $
+                                       <span class="text-success font-weight-bold">Total Cost: </span>@item.Cost $
                                    </div>
                                </div>
                            </div>

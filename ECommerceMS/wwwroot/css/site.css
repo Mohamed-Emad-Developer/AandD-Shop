@@ -1,5 +1,76 @@
-﻿*{
-    padding:0;
-    margin:0;
-    box-sizing:border-box;
+﻿* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
+
+:root {
+    --main-color: #319E50;
+    --secondary-color: #2ba64e;
+}
+a, a:hover{
+    text-decoration: none;
+}
+ul{
+    padding:0;
+}
+ul li{
+    list-style:none;
+}
+.field-validation-error {
+    color: #ba0819 !important;
+}
+
+body {
+    font-family: 'Cairo', sans-serif !important;
+}
+
+nav i {
+    margin-right: 10px;
+}
+
+footer.customer-footer {
+    padding: 100px 0;
+    background-color: #333;
+    color: white;
+    /*position: absolute;*/
+    width: 100%;
+    /*bottom: 0;*/
+}
+
+    footer.customer-footer ul {
+        padding: 0;
+        margin-top: 25px;
+    }
+
+        footer.customer-footer ul > li > a {
+            color: #ddd;
+            transition: 0.3s;
+        }
+
+            footer.customer-footer ul > li > a:hover {
+                color: white;
+            }
+
+        footer.customer-footer ul li {
+            margin-bottom: 15px;
+        }
+
+            footer.customer-footer ul li i {
+                border-radius: 50%;
+                padding: 5px;
+                margin-right: 10px;
+                transition: 0.3s;
+            }
+
+                footer.customer-footer ul li i.fa-facebook {
+                    background-color: #3b5998;
+                }
+
+                footer.customer-footer ul li i.fa-envelope {
+                    background-color: #db4a39;
+                }
+
+                footer.customer-footer ul li i.fa-whatsapp {
+                    background-color: #25d366;
+                }

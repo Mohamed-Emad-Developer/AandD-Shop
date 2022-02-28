@@ -4,47 +4,135 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ECommerceMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    @RenderSection("style",false);
+    <link rel="stylesheet" href="~/lib/fontawesome-free-5.15.4-web/css/all.min.css" />
+    @RenderSection("Style",false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ECommerceMS</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        @if (User.IsInRole("Admin"))
+        {
+
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand text-white font-weight-bolder" asp-area="" asp-controller="Home" asp-action="Index">A&D Shop</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Product</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial"/>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i>Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
+                            </li>
+                           
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        }
+        else
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-success border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand text-white font-weight-bolder" asp-area="" asp-controller="Home" asp-action="Index">A&D Shop</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i>Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="GetAllProductsForCustomer">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Category" asp-action="GetAllCategoriesForCustomer">Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="FavouriteProducts"><i class="fas fa-heart text-danger"></i>Favourite Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Order" asp-action="ShowOrders">All Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link font-weight-bolder btn btn-warning  " asp-area="" asp-controller="Products" asp-action="GetAllProductsForCustomer"><i class="fas fa-crown"></i>Customize Product</a>
+                            </li>
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </nav>
+
+        }
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2022 - ECommerceMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - ECommerceMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    }
+    else
+    {
+        <footer class="customer-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Contact Us</h4>
+                        <ul>
+                            <li>
+                                <a href=""><i class="fab fa-facebook"></i>facebook</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fab fa-whatsapp"></i>whatsapp</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="far fa-envelope"></i>gmail</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Some Links</h4>
+                        <ul>
+                            <li>
+                                <a href="#products">Products</a>
+                            </li>
+                            <li>
+                                <a href="#categories">Categories</a>
+                            </li>
+                            <li>
+                                <a href="#services">Services</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h1>Ecommerce MS</h1>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
