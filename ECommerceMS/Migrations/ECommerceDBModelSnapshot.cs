@@ -488,7 +488,7 @@ namespace ECommerceMS.Migrations
                         .HasForeignKey("AdminId");
 
                     b.HasOne("ECommerceMS.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -590,6 +590,11 @@ namespace ECommerceMS.Migrations
             modelBuilder.Entity("ECommerceMS.Models.Cart", b =>
                 {
                     b.Navigation("ProductCarts");
+                });
+
+            modelBuilder.Entity("ECommerceMS.Models.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("ECommerceMS.Models.Customer", b =>
