@@ -3,14 +3,13 @@ using ECommerceMS.services;
 using ECommerceMS.services.repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
- 
+
 namespace ECommerceMS.Controllers
 {
     public class ProductsController : Controller
@@ -28,15 +27,16 @@ namespace ECommerceMS.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index()// view for get all products to customer
         {
             List<Product> product = ProductRepository.GetAll();
             return View(product);
         }
-        public IActionResult GetAllProductsForCustomer()
+
+        public IActionResult GetAllProductsForAdmin()// view for get all products to admin
         {
             List<Product> product = ProductRepository.GetAll();
-            return View("AllProducts", product);
+            return View("GetAllProducts", product);
         }
 
         public IActionResult Details(int id)
@@ -47,7 +47,7 @@ namespace ECommerceMS.Controllers
             return View(product);
         }
 
-        public IActionResult CustomerDetails(int id)
+        public IActionResult CustomerDetails(int id) //view for productDetails to customer
         {
             Product product = ProductRepository.GetById(id);
             List<Category> category = CategoryRepository.GetAll();
@@ -171,5 +171,16 @@ namespace ECommerceMS.Controllers
             var products = ProductRepository.GetFavouriteProducts(userManager.GetUserId(User));
             return View(products);
         }
+        public IActionResult AddToFavouriteList(int id)
+        {
+            ProductRepository.AddToFavouriteList(userManager.GetUserId(User), id);
+            return RedirectToAction("FavouriteProducts");
+        }
+        public IActionResult RemoveFromFavouriteList(int id)
+        {
+            ProductRepository.RemoveFromFavouriteList(userManager.GetUserId(User), id);
+            return RedirectToAction("FavouriteProducts");
+        }
+   
     }
 }

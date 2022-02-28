@@ -72,5 +72,6 @@ namespace ECommerceMS.Data
         public DbSet<ProductCarts> ProductCarts { get; set; }
         public DbSet<ProductOrders> ProductOrders { get; set; }
         public DbSet<FavouriteList> FavouriteLists { get; set; }
+      
     }
 }

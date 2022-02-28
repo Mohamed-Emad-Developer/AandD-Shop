@@ -12,6 +12,7 @@
             Categories
         </h1>
         <div class="container">
+            <a asp-action="" asp-controller="" class="btn btn-success text-capitalize ms-3">show all categories <i class="fas fa-angle-double-right"></i></a>
             <div class="categories-content">
                 <div class="row">
                     @foreach (var category in Model.Categories)
@@ -35,12 +36,14 @@
 
 <!-- start product slider -->
 <div id="products" class="product-slider p-5 mb-5">
+
     <section>
         <div class="container slider-container">
             <h1 class="text-capitalize fw-bold text-center sec-header">
                 ower products
             </h1>
-            <div class="row">
+            <a asp-controller="Products" asp-action="Index" class="btn btn-success text-capitalize ms-3">show all product <i class="fas fa-angle-double-right"></i></a>
+            <div class="row my-3">
                 @foreach (var product in Model.Products)
                 {
                     <div class="col-lg-4 col-sm-6 col-12 mb-5">
@@ -48,7 +51,7 @@
                             <div class="product-label product-offer">10% off</div>
                             <div class="product-img">
                                 <div class="img-overlay">
-                                    <a asp-action="Details" asp-controller="Products" asp-route-id="@product.Id" class="text-white">
+                                    <a asp-action="CustomerDetails" asp-controller="Products" asp-route-id="@product.Id" class="text-white">
                                         <i class="far fa-eye"></i>
                                     </a>
                                 </div>
@@ -56,9 +59,14 @@
                             </div>
                             <div class="product-info">
                                 <div class="product-name">
-                                @product.Name
+                                    @product.Name
                                 </div>
                                 <span class="fw-bold">EGP @product.Price</span>
+
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <a asp-action="" asp-controller=""><i class="fas fa-shopping-cart"></i></a>
+                                    <a asp-action="AddToFavouriteList" asp-controller="Products" asp-route-id="@product.Id"><i class="fas fa-heart"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -11,5 +11,7 @@ namespace ECommerceMS.services
         Product GetById(int id);
         int Update(int id, Product prod);
         List<Product> GetFavouriteProducts(string customerId);
+        int AddToFavouriteList(string customerId, int productId);
+        int RemoveFromFavouriteList(string customerId, int productId);
     }
 }

@@ -42,7 +42,7 @@ namespace ECommerceMS.services
             product.Price = prod.Price;
             product.CategoryId = prod.CategoryId;
             product.StockQuantity = prod.StockQuantity;
-           
+
             int raw = DBContext.SaveChanges();
             return raw;
         }
@@ -56,8 +56,41 @@ namespace ECommerceMS.services
         }
         public List<Product> GetFavouriteProducts(string customerId)
         {
-            var products = DBContext.FavouriteLists.Where(f => f.CustomerId ==  customerId).Select(f=>f.Product).ToList();
+            var products = DBContext.FavouriteLists.Where(f => f.CustomerId == customerId).Select(f => f.Product).ToList();
             return products;
+        }
+
+        public int AddToFavouriteList(string customerId, int productId)
+        {
+            var productInDb = DBContext.Products.FirstOrDefault(p => p.Id == productId);
+            var customerInDb = DBContext.Customers.FirstOrDefault(c => c.Id == customerId);
+            var favListInDb = DBContext.FavouriteLists.Where(f => f.ProductId == productId && f.CustomerId == customerId).ToList();
+            if (!(favListInDb.Count() > 0))
+            {
+
+                var favList = new FavouriteList() { CustomerId = customerId, ProductId = productId };
+
+                productInDb.FavouriteList.Add(favList);
+                customerInDb.FavouriteList.Add(favList);
+            }
+
+            return DBContext.SaveChanges();
+
+        }
+
+        public int RemoveFromFavouriteList(string customerId, int productId)
+        {
+            var productInDb = DBContext.Products.FirstOrDefault(p => p.Id == productId);
+            var customerInDb = DBContext.Customers.FirstOrDefault(c => c.Id == customerId);
+            var favListInDb = DBContext.FavouriteLists.FirstOrDefault(f => f.ProductId == productId && f.CustomerId == customerId);
+            if (favListInDb !=null)
+            {
+                productInDb.FavouriteList.Remove(favListInDb);
+                customerInDb.FavouriteList.Remove(favListInDb);
+            }
+
+            return DBContext.SaveChanges();
+
         }
     }
 }

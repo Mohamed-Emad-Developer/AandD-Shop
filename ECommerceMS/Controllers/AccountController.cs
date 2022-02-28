@@ -1,4 +1,5 @@
 ﻿using ECommerceMS.Models;
+using ECommerceMS.services;
 using ECommerceMS.services.repository;
 using ECommerceMS.ViewModel;
 using Microsoft.AspNetCore.Identity;
@@ -13,12 +14,14 @@ namespace ECommerceMS.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ICustomerRepository _customerRepository;
-        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ICustomerRepository customerRepository, SignInManager<ApplicationUser> signInManager)
+        //private readonly IAdminRepository _adminRepository;
+        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ICustomerRepository customerRepository, SignInManager<ApplicationUser> signInManager, IAdminRepository adminRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _customerRepository = customerRepository;
             _signInManager = signInManager;
+            //_adminRepository = adminRepository;
         }
         public IActionResult Register()
         {
@@ -98,7 +101,7 @@ namespace ECommerceMS.Controllers
                         }
                         else if (await _userManager.IsInRoleAsync(user, "Admin"))
                         {
-                            returnUrl = returnUrl == null ? "/Admin/Index" : returnUrl;
+                            returnUrl = returnUrl == null ? "/Products/Index" : returnUrl;
                             return LocalRedirect(returnUrl);
                         }
                     }
@@ -120,5 +123,7 @@ namespace ECommerceMS.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+     
     }
 }
