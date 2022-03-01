@@ -2,6 +2,7 @@
 using ECommerceMS.services;
 using ECommerceMS.services.repository;
 using ECommerceMS.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace ECommerceMS.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "Customer")]
         public IActionResult CheckOut(int id) // id refers to cart_id 
         {
             decimal TotalPrice = 0;
@@ -46,6 +48,7 @@ namespace ECommerceMS.Controllers
             ODVM.CartID = id; 
             return View(ODVM);
         }
+        [Authorize(Roles = "Customer")]
         public IActionResult ConfirmOrder(OrderDetailsViewModel newOrder)
         {
             if (ModelState.IsValid)
@@ -72,16 +75,19 @@ namespace ECommerceMS.Controllers
                 return View("CheckOut",newOrder);
             }
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult ShowOrders() // Show All orders for admin
         {
             List<Order> orders = orderRepository.Get();
             return View(orders);
         }
+        [Authorize(Roles = "Customer")]
         public IActionResult GetProductsOfOrder(int id) // Show products for each order
         {
             Order order = orderRepository.Get(id);
             return PartialView("_GetProducts", order);
-        }
+        }           
+        [Authorize(Roles = "Customer")]
         public IActionResult Show_CusOrders(string id) // show orders for a specified customer
         {
             List<Order> orders = orderRepository.GetByCusID(id);

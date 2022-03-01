@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,7 +17,6 @@
     <header>
         @if (User.IsInRole("Admin"))
         {
-
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
                 <div class="container">
                     <a class="navbar-brand text-white font-weight-bolder" asp-area="" asp-controller="Home" asp-action="Index">A&D Shop</a>
@@ -35,6 +35,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Order" asp-action="ShowOrders">All Orders</a>
+                            </li>
                            
                         </ul>
                         <partial name="_LoginPartial" />
@@ -44,6 +47,7 @@
         }
         else
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //get id of the logged user
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-success border-bottom box-shadow mb-3">
                 <div class="container">
                     <a class="navbar-brand text-white font-weight-bolder" asp-area="" asp-controller="Home" asp-action="Index">A&D Shop</a>
@@ -66,7 +70,7 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="FavouriteProducts"><i class="fas fa-heart text-danger"></i>Favourite Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Order" asp-action="ShowOrders">All Orders</a>
+                                <a class="nav-link text-white" asp-area="" asp-route-id="@userId" asp-controller="Order" asp-action="Show_CusOrders">your Orders</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-weight-bolder btn btn-warning  " asp-area="" asp-controller="Products" asp-action="GetAllProductsForCustomer"><i class="fas fa-crown"></i>Customize Product</a>
