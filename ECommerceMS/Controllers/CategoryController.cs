@@ -48,6 +48,12 @@ namespace ECommerceMS.Controllers
             return View(CtgDetailsModel);
         }
 
+        public IActionResult UserDetails(int id)
+        {
+            Category CtgDetailsModel = categoryRepository.GetById(id);
+            return View(CtgDetailsModel);
+        }
+
         // Add New Catgory
         [HttpGet]
         public IActionResult Create()

@@ -1,1 +1,25 @@
-﻿@model List<Category>
+﻿@model IEnumerable<ECommerceMS.Models.Category>
+
+    
+<hr id="scroll" />
+<h2 style="text-align:center;font-family:'Courgette',cursive;font-size:50px">Categories</h2>
+<hr />
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4  col-md-6">
+                <div class="thumbnail">
+                    <div class="caption" style="text-align:center">
+                        <a asp-action="UserDetails" asp-controller="Category" asp-route-id="@item.Id"><img src="~/Images/Categories/@item.Image" /></a>
+                        <p></p>
+                        <p style="font-size:20px">@item.Title</p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+<br />

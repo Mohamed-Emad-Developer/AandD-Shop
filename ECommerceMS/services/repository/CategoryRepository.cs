@@ -27,7 +27,7 @@ namespace ECommerceMS.services.repository
 
         public Category GetById(int id)
         {
-            return context.Categories.FirstOrDefault(c => c.Id == id);
+            return context.Categories.Include(c => c.Products).FirstOrDefault(c => c.Id == id);
         }
         public Category GetByName(string title)
         {
