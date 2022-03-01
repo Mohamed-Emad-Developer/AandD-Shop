@@ -1,5 +1,6 @@
 ﻿using ECommerceMS.Models;
 using ECommerceMS.services.repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,18 +23,23 @@ namespace ECommerceMS.Controllers
             this._hostEnv = hostEnv;
             _hostEnvironment = hostEnvironment;
         }
+
+      
         public IActionResult GetAllCategoriesForCustomer()
         {
             List<Category> CtgModel = categoryRepository.GetAll();
             return View("AllCategories", CtgModel);
         }
 
+        [Authorize(Roles = "Admin")]
         //Get All Catgories
         public IActionResult Index()
         {
             List<Category> CtgModel = categoryRepository.GetAll();
             return View(CtgModel);
         }
+
+        [Authorize(Roles = "Admin")]
         //Get All Catgories
         public IActionResult Search(string searchString)
         {
@@ -41,19 +47,21 @@ namespace ECommerceMS.Controllers
             return View("Index" ,CtgModel);
         }
 
+        [Authorize(Roles = "Admin")]
         //Get Catgory Details
         public IActionResult Details(int id)
         {
             Category CtgDetailsModel = categoryRepository.GetById(id);
             return View(CtgDetailsModel);
         }
-
+   
         public IActionResult UserDetails(int id)
         {
             Category CtgDetailsModel = categoryRepository.GetById(id);
             return View(CtgDetailsModel);
         }
 
+        [Authorize(Roles = "Admin")]
         // Add New Catgory
         [HttpGet]
         public IActionResult Create()
@@ -63,6 +71,7 @@ namespace ECommerceMS.Controllers
         }
 
         // Save Catgory
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(Category newCtg)
         {
@@ -88,6 +97,7 @@ namespace ECommerceMS.Controllers
             return View(newCtg);
         }
 
+        [Authorize(Roles = "Admin")]
         //Edit Catgory
         public IActionResult Edit(int id)
         {
@@ -95,6 +105,7 @@ namespace ECommerceMS.Controllers
             return View(Ctg);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit([FromRoute] int id, Category newCtg)
         {
@@ -107,6 +118,7 @@ namespace ECommerceMS.Controllers
             return View(newCtg);
         }
 
+        [Authorize(Roles = "Admin")]
         //Delete Catgory
         public IActionResult Delete(int id)
         {
@@ -114,6 +126,7 @@ namespace ECommerceMS.Controllers
             return View(ctg);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         public IActionResult ConfirmeDelete(int id)
         {
@@ -132,6 +145,7 @@ namespace ECommerceMS.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         //Title Exist
         public IActionResult TitleExist(string Title, int id)
         {

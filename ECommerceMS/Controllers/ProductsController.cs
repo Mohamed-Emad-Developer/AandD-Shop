@@ -33,12 +33,14 @@ namespace ECommerceMS.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult GetAllProductsForAdmin()// view for get all products to admin
         {
             List<Product> product = ProductRepository.GetAll();
             return View("GetAllProducts", product);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Details(int id)
         {
             Product product = ProductRepository.GetById(id);
@@ -55,6 +57,7 @@ namespace ECommerceMS.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             List<Category> category = CategoryRepository.GetAll();
@@ -62,6 +65,7 @@ namespace ECommerceMS.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(Product prod)
         {
@@ -88,7 +92,8 @@ namespace ECommerceMS.Controllers
             return View(prod);
         }
 
-        public  IActionResult Edit(int id)
+        [Authorize(Roles = "Admin")]
+        public IActionResult Edit(int id)
         {
             Product product = ProductRepository.GetById(id);
             //string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -103,6 +108,7 @@ namespace ECommerceMS.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit([FromRoute] int id, Product prod)
         {
@@ -112,8 +118,8 @@ namespace ECommerceMS.Controllers
                 if (prod.ImageFile != null)
                 {
                     string wwwRootPath = _hostEnvironment.WebRootPath;
-                    string OldPath =  productInDB.Image;
-                    if(OldPath != prod.Image)
+                    string OldPath = productInDB.Image;
+                    if (OldPath != prod.Image)
                     {
                         if (System.IO.File.Exists(OldPath))
                         {
@@ -138,6 +144,7 @@ namespace ECommerceMS.Controllers
             return View(prod);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             Product product = ProductRepository.GetById(id);
@@ -146,8 +153,9 @@ namespace ECommerceMS.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
-        public  IActionResult ConfirmeDelete(int id)
+        public IActionResult ConfirmeDelete(int id)
         {
             var prod = ProductRepository.GetById(id);
             if (prod.Image != null)
@@ -165,22 +173,27 @@ namespace ECommerceMS.Controllers
             ViewData["Categories"] = category;
             return RedirectToAction("Index");
         }
+
         [Authorize(Roles = "Customer")]
         public IActionResult FavouriteProducts()
         {
             var products = ProductRepository.GetFavouriteProducts(userManager.GetUserId(User));
             return View(products);
         }
+
+        [Authorize(Roles = "Customer")]
         public IActionResult AddToFavouriteList(int id)
         {
             ProductRepository.AddToFavouriteList(userManager.GetUserId(User), id);
             return RedirectToAction("FavouriteProducts");
         }
+
+        [Authorize(Roles = "Customer")]
         public IActionResult RemoveFromFavouriteList(int id)
         {
             ProductRepository.RemoveFromFavouriteList(userManager.GetUserId(User), id);
             return RedirectToAction("FavouriteProducts");
         }
-   
+
     }
 }

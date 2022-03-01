@@ -1,12 +1,14 @@
 ﻿using ECommerceMS.Models;
 using ECommerceMS.services;
 using ECommerceMS.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace ECommerceMS.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class CartController : Controller
     {
         private readonly ICartRepository _cartRepository;
@@ -17,7 +19,6 @@ namespace ECommerceMS.Controllers
             _cartRepository = cartRepository;
             _userManager = userManager;
         }
-        //int AddPrpductToCart(int prodcutId, string customerId);
         public IActionResult AddToCart(int id)
         {
             _cartRepository.AddPrpductToCart(id, _userManager.GetUserId(User));
@@ -36,12 +37,12 @@ namespace ECommerceMS.Controllers
         }
         public IActionResult IncrementQuantity(int cartId, int productId)
         {
-           _cartRepository.IncrementQuantity( cartId,  productId);
+            _cartRepository.IncrementQuantity(cartId, productId);
             return RedirectToAction("CartDetails");
         }
         public IActionResult DecrementQuantity(int cartId, int productId)
         {
-           _cartRepository.DecrementQuantity(cartId, productId);
+            _cartRepository.DecrementQuantity(cartId, productId);
             return RedirectToAction("CartDetails");
         }
 

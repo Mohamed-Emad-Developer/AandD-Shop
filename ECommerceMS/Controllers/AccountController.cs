@@ -23,6 +23,7 @@ namespace ECommerceMS.Controllers
             _signInManager = signInManager;
             //_adminRepository = adminRepository;
         }
+        
         public IActionResult Register()
         {
             return View();
