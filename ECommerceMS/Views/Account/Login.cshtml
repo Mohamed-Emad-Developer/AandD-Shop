@@ -15,19 +15,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-
     <link href="~/css/register.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome-free-5.15.4-web/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
+        <a class="home-link" asp-action="Index" asp-controller="Home"><i class="fas fa-home"></i></a>
         <div class="register-container">
             <div class="row">
                 <div class="col-md-6">
                     <div class="register-form">
-                        <h1 class="text-center text-white text-uppercase">Login</h1>
+                        <h1 class="text-center text-success text-uppercase">Login</h1>
                         <form asp-action="Login" asp-controller="Account" method="post">
                             <div asp-validation-summary="All" class="text-danger"></div>
-                              <input hidden name="ReturnUrl" value="@ViewBag.ReturnUrl" />
+                            <input hidden name="ReturnUrl" value="@ViewBag.ReturnUrl" />
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -58,12 +59,12 @@
                                 </div>
                             </div>
                             <input type="submit" value="Login" class="btn btn-success" />
-                            <a asp-action="Register" asp-controller="Account" class="btn btn-light  d-block my-3">Register</a>
+                            <a asp-action="Register" asp-controller="Account" class="btn btn-success  d-block my-3">Register</a>
 
                         </form>
                     </div>
                 </div>
-                <div class="col-md-6 d-sm-block bg-white d-none">
+                <div class="col-md-6 d-sm-block bg-white d-none  img-container">
                     <div class="shop-img">
                         <img src="/Images/site/shop.png" />
                     </div>

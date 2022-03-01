@@ -16,14 +16,16 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/css/register.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome-free-5.15.4-web/css/all.min.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="container">
+        <a class="home-link" asp-action="Index" asp-controller="Home"><i class="fas fa-home"></i></a>
         <div class="register-container">
             <div class="row">
                 <div class="col-md-6">
                     <div class="register-form">
-                        <h1 class="text-center text-white text-uppercase">Register Now</h1>
+                        <h1 class="text-center text-success text-uppercase">Register Now</h1>
                         <form asp-action="Register">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="row">
@@ -88,12 +90,12 @@
                             </div>
 
                             <input type="submit" value="Register" class="btn btn-success" />
-                            <a asp-action="Login" asp-controller="Account" class="btn btn-light d-block my-3">Login</a>
+                            <a asp-action="Login" asp-controller="Account" class="btn btn-success d-block my-3">Login</a>
 
                         </form>
                     </div>
                 </div>
-                <div class="col-md-6 d-sm-block bg-white d-none">
+                <div class="col-md-6 d-sm-block bg-white d-none img-container">
                     <div class="shop-img">
                         <img src="/Images/site/shop.png" />
                     </div>

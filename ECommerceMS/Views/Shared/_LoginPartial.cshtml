@@ -1,14 +1,27 @@
 ﻿@using Microsoft.AspNetCore.Identity
-<ul class="navbar-nav ">
+@using System.Security.Claims
+<ul class="navbar-nav">
     @if (User.Identity.IsAuthenticated)
     {
         var user = await UserManager.FindByEmailAsync(User.Identity.Name);
-        <li class="nav-item">
-            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Manage"><i class="fas fa-user"></i>Hi @user.Name</a>
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //get id of the logged user
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i>@user.Name
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @*<a class="dropdown-item" asp-route-id="@userId" asp-controller="Order" asp-action="Show_CusOrders">My Account</a>*@
+                @if (User.IsInRole("Customer"))
+                {
+                <a class="dropdown-item" asp-route-id="@userId" asp-controller="Customer" asp-action="Account">My Account</a>
+                    <a class="dropdown-item" asp-controller="Products" asp-action="FavouriteProducts"><i class="fas fa-heart text-danger"></i>Favourite Products</a>
+                    <a class="dropdown-item" asp-route-id="@userId" asp-controller="Order" asp-action="Show_CusOrders">your Orders</a>
+                }
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-        </li>
+
     }
     else
     {

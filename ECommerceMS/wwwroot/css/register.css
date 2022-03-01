@@ -9,21 +9,48 @@ body {
     flex-direction: column;
     height: 100vh;
 }
+
 .register-container {
     box-shadow: 0 0 10px 3px #ddd;
 }
+
 .register-form {
-    background: var(--main-color);
+    background: white;
     padding: 100px 10px;
 }
 
-    .register-form label {
-        color: white;
+a.home-link {
+    background: white;
+    color: var(--main-color) !important;
+    font-size: 50px;
+    box-shadow: 0 0 10px #ddd;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 20px auto;
+    transition:0.3s;
+}
+
+    a.home-link:hover {
+        text-decoration: none;
+        color: white !important;
+        background: var(--main-color) !important;
     }
 
-    .register-form input {
-        width: 100%;
-    }
+.register-form label {
+    color: var(--main-color);
+}
+
+.register-form input {
+    width: 100%;
+}
+
+.img-container {
+    background: var(--main-color) !important;
+}
 
 .shop-img img {
     max-width: 100%;

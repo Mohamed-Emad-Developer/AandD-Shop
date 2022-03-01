@@ -102,7 +102,7 @@ namespace ECommerceMS.Controllers
                         }
                         else if (await _userManager.IsInRoleAsync(user, "Admin"))
                         {
-                            returnUrl = returnUrl == null ? "/Products/Index" : returnUrl;
+                            returnUrl = returnUrl == null ? "/Products/GetAllProductsForAdmin" : returnUrl;
                             return LocalRedirect(returnUrl);
                         }
                     }

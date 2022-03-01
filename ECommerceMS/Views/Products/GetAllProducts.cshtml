@@ -12,7 +12,7 @@
 </p>
 <hr />
 
-<table class="table table-bordered table-hover">
+<table class="table table-responsive table-bordered table-hover">
     <thead>
         <tr>
             <th>
@@ -36,27 +36,28 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <img src="~/Images/Products/@item.Image" width="300" height="300" />
-            </td>>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StockQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Title)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id" class ="btn btn-secondary w-100">Details</a>
-            </td>
-        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src="~/Images/Products/@item.Image" width="300" height="300" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Title)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class ="btn btn-secondary w-100">Details</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

@@ -1,0 +1,48 @@
+﻿@model Customer
+<style>
+    .customer-info {
+        border: 1px solid #ddd;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 25px 0;
+        box-shadow: 0 0 10px #ddd;
+        border-radius: 5px;
+    }
+
+        .customer-info .links li a {
+            display: block;
+            width: 100%;
+            background: white;
+            padding: 10px 15px;
+            transition: 0.3s;
+            margin: 15px 0;
+            border-radius: 5px;
+            text-align: center;
+            color:black;
+            border:1px solid var(--main-color);
+        }
+        .customer-info .links li a:hover {
+            background:var(--main-color);
+            color:white
+        }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="customer-info">
+                <i class="fas fa-user-circle fa-10x"></i>
+                <h3>@Model.User.Name</h3>
+                <h6 class="text-muted">@Model.User.Email</h6>
+                <ul class="links">
+                    <li><a asp-action="" asp-controller="">edit your account</a></li>
+                    <li><a asp-action="" asp-controller="">your orders</a></li>
+                    <li><a asp-action="" asp-controller="">favourite products</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8">
+        </div>
+    </div>
+</div>
