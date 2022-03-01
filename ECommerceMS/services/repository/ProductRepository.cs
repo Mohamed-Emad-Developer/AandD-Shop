@@ -92,5 +92,11 @@ namespace ECommerceMS.services
             return DBContext.SaveChanges();
 
         }
+        public int DecrementStockQuantity(int ProductId, int Quantity)
+        {
+            var Product = DBContext.Products.FirstOrDefault(x => x.Id == ProductId);
+            Product.StockQuantity = Product.StockQuantity-Quantity;
+            return DBContext.SaveChanges();
+        }
     }
 }

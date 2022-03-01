@@ -15,12 +15,14 @@ namespace ECommerceMS.Controllers
         readonly ICustomerRepository customerRepository;
         readonly ICartRepository cartRepository;
         readonly IProductOrdersRepository productOrdersRepository;
-        public OrderController(IOrderRepository _orderRepo, ICustomerRepository _customerRepo, ICartRepository _cartRepo, IProductOrdersRepository _OrderProductRepo)
+        readonly IProductRepository productRepository;
+        public OrderController(IOrderRepository _orderRepo, ICustomerRepository _customerRepo, ICartRepository _cartRepo, IProductOrdersRepository _OrderProductRepo,IProductRepository __productRepo)
         {
             orderRepository = _orderRepo;
             customerRepository = _customerRepo;
             cartRepository = _cartRepo;
             productOrdersRepository = _OrderProductRepo;
+            productRepository = __productRepo;
         }
         public IActionResult Index()
         {
@@ -60,10 +62,11 @@ namespace ECommerceMS.Controllers
                 Cart cart = cartRepository.Get(newOrder.CartID);
                 cart.OrderNum = ordernum;
                 List<ProductCarts> productCart = cart.ProductCarts.ToList();
+                
                 foreach (var item in productCart)
                 {
                     productOrdersRepository.Create(ordernum,item.Product.Id,item.Quantity);
-                    item.Product.StockQuantity=item.Product.StockQuantity-1;
+                    productRepository.DecrementStockQuantity(item.ProductId,item.Quantity);
                 }
                 ViewData["success"] = "Order Saved successfully";
                 ViewData["CustomerID"] = CustomerId;
