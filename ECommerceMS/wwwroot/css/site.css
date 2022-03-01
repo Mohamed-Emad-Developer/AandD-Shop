@@ -8,15 +8,19 @@
     --main-color: #319E50;
     --secondary-color: #2ba64e;
 }
-a, a:hover{
+
+a, a:hover {
     text-decoration: none !important;
 }
-ul{
-    padding:0;
+
+ul {
+    padding: 0;
 }
-ul li{
-    list-style:none;
-}
+
+    ul li {
+        list-style: none;
+    }
+
 .field-validation-error {
     color: #ba0819 !important;
 }
@@ -74,3 +78,7 @@ footer.customer-footer {
                 footer.customer-footer ul li i.fa-whatsapp {
                     background-color: #25d366;
                 }
+
+.card {
+    box-shadow: 0 0 10px #ddd !important;
+}

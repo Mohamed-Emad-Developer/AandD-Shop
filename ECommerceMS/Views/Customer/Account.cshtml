@@ -1,4 +1,8 @@
-﻿@model Customer
+﻿@using ECommerceMS.ViewModel
+@model CustomerAccountViewModel
+@{
+    ViewData["Title"] = Model.Cusomer.User.Name;
+}
 <style>
     .customer-info {
         border: 1px solid #ddd;
@@ -9,40 +13,84 @@
         padding: 25px 0;
         box-shadow: 0 0 10px #ddd;
         border-radius: 5px;
+        position: sticky;
+        top: 0;
+        width: 100%;
     }
 
-        .customer-info .links li a {
-            display: block;
-            width: 100%;
-            background: white;
-            padding: 10px 15px;
-            transition: 0.3s;
-            margin: 15px 0;
-            border-radius: 5px;
-            text-align: center;
-            color:black;
-            border:1px solid var(--main-color);
+
+    @@media screen and (max-width: 768px) {
+         .customer-info h3, .customer-info h6 {
+          width:100%;
+          text-align:center;
+          overflow:clip;
+          text-overflow:ellipsis;
         }
+        .customer-info h6 {
+         font-size:14px;
+        }
+    
+    }
+    
+
+    .customer-info .links li a {
+        display: block;
+        width: 100%;
+        background: white;
+        padding: 10px 15px;
+        transition: 0.3s;
+        margin: 15px 0;
+        border-radius: 5px;
+        text-align: center;
+        color: black;
+        border: 1px solid var(--main-color);
+    }
+
         .customer-info .links li a:hover {
-            background:var(--main-color);
-            color:white
+            background: var(--main-color);
+            color: white
         }
+
+    .order-info {
+        background: white;
+        box-shadow: 0 0 10px #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
 </style>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <div class="customer-info">
+        <div class="col-lg-4 col-sm-6">
+            <div class="customer-info mb-lg-0 mb-4">
                 <i class="fas fa-user-circle fa-10x"></i>
-                <h3>@Model.User.Name</h3>
-                <h6 class="text-muted">@Model.User.Email</h6>
+                <h3>@Model.Cusomer.User.Name</h3>
+                <h6 class="text-muted">@Model.Cusomer.User.Email</h6>
                 <ul class="links">
                     <li><a asp-action="" asp-controller="">edit your account</a></li>
-                    <li><a asp-action="" asp-controller="">your orders</a></li>
-                    <li><a asp-action="" asp-controller="">favourite products</a></li>
+                    <li><a asp-action="Show_CusOrders" asp-controller="Order" asp-route-id="@Model.Cusomer.Id">your orders</a></li>
+                    <li><a asp-action="FavouriteProducts" asp-controller="Products">favourite products</a></li>
                 </ul>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-lg-8 col-sm-6">
+            @foreach (var order in Model.Orders)
+            {
+                <div class="order-info">
+                    <h3>@order.Cost EGP</h3>
+
+                    <small class="text-muted">@order.Date</small>
+                    @foreach (var po in order.ProductOrders)
+                    {
+                        <div>
+                            <img width="100" height="100" src="~/Images/products/@po.Product.Image" />
+                            <p>@po.Product.Name - @po.Product.Price EGP - Quantity: @po.Quantity</p>
+                        </div>
+                    }
+                </div>
+
+
+            }
         </div>
     </div>
 </div>

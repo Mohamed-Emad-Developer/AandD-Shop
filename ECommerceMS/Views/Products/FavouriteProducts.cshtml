@@ -11,30 +11,23 @@
     <div class="row">
         @foreach (var product in Model)
        {
-            <div class="col-lg-4 col-sm-6 col-12 mb-5">
-                        <div class="product-card">
-                            <div class="product-label product-offer">10% off</div>
-                            <div class="product-img">
-                                <div class="img-overlay">
-                                    <a asp-action="CustomerDetails" asp-controller="Products" asp-route-id="@product.Id" class="text-white">
-                                        <i class="far fa-eye"></i>
-                                    </a>
-                                </div>
-                                <img src="~/Images/products/@product.Image" alt="" />
+             <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="d-flex justify-content-between">
+                                <a class="btn" style="font-size: 30px; text-align: left;" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@product.Id">🛒</a>
+                                <a class="btn" style="font-size: 30px; text-align: right;" asp-action="AddToFavouriteList" asp-controller="Products" asp-route-id="@product.Id">❤️</a>
                             </div>
-                            <div class="product-info">
-                                <div class="product-name">
-                                @product.Name
-                                </div>
-                                <span class="fw-bold">EGP @product.Price</span>
-
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <a asp-action="" asp-controller=""><i class="fas fa-shopping-cart"></i></a>
-                                   <a  asp-action="RemoveFromFavouriteList" asp-controller="Products" asp-route-id="@product.Id"><i class="fas fa-times"></i></a>
-                                </div>
+                            <img src="~/Images/products/@product.Image" class="card-img-top" style="height: 300px;">
+                            <div class="card-body" style="text-align: center;">
+                                <h4>@product.Name</h4>
+                                <h4>@product.Price EGP</h4>
+                                <a class="btn btn-secondary w-100 mb-3" asp-action="CustomerDetails" asp-controller="Products" asp-route-id="@product.Id">Details</a>
+                                <a class="btn btn-danger w-100" asp-action="RemoveFromFavouriteList" asp-controller="Products" asp-route-id="@product.Id">Remove From Favourite</a>
                             </div>
                         </div>
+                        <br>
                     </div>
+         
        }
     </div>
 </div>
