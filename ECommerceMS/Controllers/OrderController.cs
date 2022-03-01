@@ -67,10 +67,12 @@ namespace ECommerceMS.Controllers
                 {
                     productOrdersRepository.Create(ordernum,item.Product.Id,item.Quantity);
                     productRepository.DecrementStockQuantity(item.ProductId,item.Quantity);
+                    cartRepository.RemoveProductFromCart(item.CartId,item.ProductId);
                 }
                 ViewData["success"] = "Order Saved successfully";
                 ViewData["CustomerID"] = CustomerId;
                 return View();
+
             }
             else
             {
