@@ -13,5 +13,6 @@ namespace ECommerceMS.services
         List<Product> GetFavouriteProducts(string customerId);
         int AddToFavouriteList(string customerId, int productId);
         int RemoveFromFavouriteList(string customerId, int productId);
+        int DecrementStockQuantity(int ProductId, int Quantity);
     }
 }
