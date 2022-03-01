@@ -14,18 +14,16 @@
 }
 
     .category .category-img {
-        border: 1px solid #ddd;
-        border-radius: 50%;
-        overflow: hidden;
-        box-shadow: 0 0 10px #ddd;
+        overflow: initial;
     }
 
     .category img {
-        width: 150px;
-        height: 150px;
-        object-fit: contain;
+        width: 210px;
+        height: 210px;
+        object-fit: fill;
         max-width: 100%;
         transition: 0.3s;
+        margin: 20px 0;
     }
 
     .category:hover img {

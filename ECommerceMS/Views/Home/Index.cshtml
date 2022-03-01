@@ -20,7 +20,7 @@
                         <div class="col-md-4">
                             <div class="category">
                                 <div class="category-img">
-                                    <a asp-action="UserDetails" asp-route-id="@category.Id"><img src="~/Images/Categories/@category.Image" /></a>
+                                    <a asp-action="UserDetails" asp-controller="Category" asp-route-id="@category.Id"><img src="~/Images/Categories/@category.Image" /></a>
                                 </div>
                                 <h4 class="fw-bold">@category.Title</h4>
                             </div>
