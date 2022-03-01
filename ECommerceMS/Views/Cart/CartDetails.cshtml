@@ -1,33 +1,44 @@
-﻿@model Cart
-@*@section Style{
-    <link rel="stylesheet" href="~/css/product-style.css"/>
-    }*@
+﻿@using ECommerceMS.ViewModel
+@model ShoppingCartViewModel
+@{
+    ViewData["title"] = "Your Cart";
+}
 <div class="container">
     <div class="row">
         <table class="table table-bordered">
             <thead class="bg-success">
                 <tr>
-                    <th>#</th>
+
                     <th>Product Name</th>
+                    <th>Image</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var pc in Model.ProductCarts)
+                @foreach (var pc in Model.Cart.ProductCarts)
                 {
                     <tr>
-                        <td>#</td>
+
                         <td>@pc.Product.Name</td>
+                        <td><img src="~/Images/products/@pc.Product.Image" /></td>
                         <td>
-                            <a asp-action="DecrementQuantity" asp-controller="Cart" asp-route-id="@Model.Id">-</a>
+                            <a class="btn btn-danger" asp-action="DecrementQuantity" asp-route-cartId="@Model.Cart.Id" asp-route-productId="@pc.ProductId" asp-controller="Cart"><i class="fas fa-minus text-white"></i></a>
                             @pc.Quantity
-                            <a asp-action="IncrementQuantity" asp-controller="Cart" asp-route-id="@Model.Id">+</a>
+                            <a class="btn btn-primary" asp-action="IncrementQuantity" asp-route-cartId="@Model.Cart.Id" asp-route-productId="@pc.ProductId" asp-controller="Cart"><i class="fas fa-plus text-white"></i></a>
                         </td>
-                        <td>@(pc.Product.Price*pc.Quantity)</td>
+                        <td>@(pc.Product.Price*pc.Quantity) EGP</td>
+                        <td> <a class="text-danger" asp-route-cartId="@Model.Cart.Id" asp-route-productId="@pc.ProductId" asp-action="RemoveProductFromCart" asp-controller="Cart"><i class="fas fa-trash"></i></a></td>
                     </tr>
                 }
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5"><span class="font-weight-bold">Total Cost: </span>@Model.TotalCost EGP</td>
+                </tr>
+
+            </tfoot>
         </table>
     </div>
 </div>

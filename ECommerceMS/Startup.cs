@@ -70,6 +70,10 @@ namespace ECommerceMS
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "ProductCart",
+                    pattern: "{controller=Cart}/{action}/{cartId?}/{productId?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });

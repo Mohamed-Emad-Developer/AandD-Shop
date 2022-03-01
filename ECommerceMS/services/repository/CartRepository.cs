@@ -45,27 +45,32 @@ namespace ECommerceMS.services.repository
             return cartInDb;
         }
 
-        public void IncrementQuantity(int cartId)
+        public void IncrementQuantity(int cartId, int productId)
         {
-            var productCartInDb = DBContext.ProductCarts.Include(pc=>pc.Product).FirstOrDefault(pc => pc.CartId == cartId);
+            var productCartInDb = DBContext.ProductCarts.Include(pc=>pc.Product).FirstOrDefault(pc => pc.CartId == cartId && pc.ProductId ==productId);
             if (productCartInDb.Quantity < productCartInDb.Product.StockQuantity)
                 productCartInDb.Quantity++;
             DBContext.SaveChanges();
         }
 
-        public void DecrementQuantity(int cartId)
+        public void DecrementQuantity(int cartId, int productId)
         {
-            var productCartInDb = DBContext.ProductCarts.FirstOrDefault(pc => pc.CartId == cartId);
+            var productCartInDb = DBContext.ProductCarts.FirstOrDefault(pc => pc.CartId == cartId&& pc.ProductId == productId);
             if (productCartInDb.Quantity > 1)
                 productCartInDb.Quantity--;
             DBContext.SaveChanges();
         }
-        //public void RemoveFromCart(int cartId,int productId)
-        //{
-        //    var productCartInDb = DBContext.ProductCarts.FirstOrDefault(pc => pc.CartId == cartId);
-        //    if (productCartInDb.Quantity > 1)
-        //        productCartInDb.Quantity--;
-        //    DBContext.SaveChanges();
-        //}
+
+        public int RemoveProductFromCart(int cartId, int productId)
+        {
+            var productCart = DBContext.ProductCarts.FirstOrDefault(pc=> pc.ProductId == productId && pc.CartId == cartId);
+            if(productCart != null)
+            {
+                DBContext.ProductCarts.Remove(productCart);
+
+            }
+            return DBContext.SaveChanges();
+        }
+     
     }
 }

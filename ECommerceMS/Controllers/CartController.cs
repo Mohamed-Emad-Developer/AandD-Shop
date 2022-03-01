@@ -1,7 +1,9 @@
 ﻿using ECommerceMS.Models;
 using ECommerceMS.services;
+using ECommerceMS.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace ECommerceMS.Controllers
 {
@@ -25,16 +27,27 @@ namespace ECommerceMS.Controllers
         public IActionResult CartDetails()
         {
             var cartInDb = _cartRepository.GetByUserId(_userManager.GetUserId(User));
-            return View(cartInDb);
+            var shopingCartVM = new ShoppingCartViewModel()
+            {
+                Cart = cartInDb,
+                TotalCost = cartInDb.ProductCarts.Sum(pc => pc.Quantity * pc.Product.Price),
+            };
+            return View(shopingCartVM);
         }
-        public IActionResult IncrementQuantity(int id)
+        public IActionResult IncrementQuantity(int cartId, int productId)
         {
-           _cartRepository.IncrementQuantity(id);
+           _cartRepository.IncrementQuantity( cartId,  productId);
             return RedirectToAction("CartDetails");
         }
-        public IActionResult DecrementQuantity(int id)
+        public IActionResult DecrementQuantity(int cartId, int productId)
         {
-           _cartRepository.DecrementQuantity(id);
+           _cartRepository.DecrementQuantity(cartId, productId);
+            return RedirectToAction("CartDetails");
+        }
+
+        public IActionResult RemoveProductFromCart(int cartId, int productId)
+        {
+            _cartRepository.RemoveProductFromCart(cartId, productId);
             return RedirectToAction("CartDetails");
         }
     }

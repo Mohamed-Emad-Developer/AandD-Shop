@@ -8,7 +8,8 @@ namespace ECommerceMS.services
         int Create(string customerId);
         int AddPrpductToCart(int prodcutId, string customerId);
         Cart GetByUserId(string customerId);
-        void IncrementQuantity(int cartId);
-        void DecrementQuantity(int cartId);
+        void IncrementQuantity(int cartId, int productId);
+        void DecrementQuantity(int cartId, int productId);
+        int RemoveProductFromCart(int cartId, int productId);
     }
 }

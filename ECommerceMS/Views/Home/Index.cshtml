@@ -64,7 +64,7 @@
                                 <span class="fw-bold">EGP @product.Price</span>
 
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <a asp-action="" asp-controller=""><i class="fas fa-shopping-cart"></i></a>
+                                    <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@product.Id"><i class="fas fa-shopping-cart"></i></a>
                                     <a asp-action="AddToFavouriteList" asp-controller="Products" asp-route-id="@product.Id"><i class="fas fa-heart"></i></a>
                                 </div>
                             </div>
