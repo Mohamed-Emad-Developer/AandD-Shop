@@ -1,0 +1,33 @@
+﻿@model Cart
+@*@section Style{
+    <link rel="stylesheet" href="~/css/product-style.css"/>
+    }*@
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered">
+            <thead class="bg-success">
+                <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pc in Model.ProductCarts)
+                {
+                    <tr>
+                        <td>#</td>
+                        <td>@pc.Product.Name</td>
+                        <td>
+                            <a asp-action="DecrementQuantity" asp-controller="Cart" asp-route-id="@Model.Id">-</a>
+                            @pc.Quantity
+                            <a asp-action="IncrementQuantity" asp-controller="Cart" asp-route-id="@Model.Id">+</a>
+                        </td>
+                        <td>@(pc.Product.Price*pc.Quantity)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
