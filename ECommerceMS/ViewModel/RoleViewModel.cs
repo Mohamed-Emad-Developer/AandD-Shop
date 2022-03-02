@@ -4,7 +4,7 @@ namespace ECommerceMS.ViewModel
 {
     public class RoleViewModel
     {
-        public string ID { get; set; }
+        public string Id { get; set; }
         [Required]
         public string RoleName { get; set; }
     }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMS.Controllers
 {
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -56,7 +56,7 @@ namespace ECommerceMS.Controllers
             var roles = context.Roles.ToList();
             foreach (var role in roles)
             {
-                RoleViewModel roleViewModel = new RoleViewModel() { RoleName = role.Name, ID = role.Id };
+                RoleViewModel roleViewModel = new RoleViewModel() { RoleName = role.Name, Id = role.Id };
                 roleViews.Add(roleViewModel);
             }
 
@@ -75,7 +75,7 @@ namespace ECommerceMS.Controllers
             var role = await roleManager.FindByIdAsync(id);
             var roleViewModel = new RoleViewModel()
             {
-                ID = role.Id,
+                Id = role.Id,
                 RoleName = role.Name,
             };
 
@@ -84,7 +84,7 @@ namespace ECommerceMS.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditRole(RoleViewModel roleViewModel, [FromRoute] string id)
+        public async Task<IActionResult> EditRole(RoleViewModel roleViewModel, [FromForm] string id)
         {
             var roleInDataBase = await roleManager.FindByIdAsync(id);
             roleInDataBase.Name = roleViewModel.RoleName;
@@ -99,8 +99,8 @@ namespace ECommerceMS.Controllers
                 {
                     ModelState.AddModelError("", error.Description);
                 }
-                return View(roleViewModel);
             }
+            return View(roleViewModel);
         }
         #endregion
         #region Delete

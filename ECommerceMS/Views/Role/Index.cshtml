@@ -26,20 +26,20 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.RoleName)
                 </td>
-                <div class="test">
                 <td class="table-row">
-                    <button class="btn btn-success">
+                    <div class="test">
+                        <button class="btn btn-success">
                             @Html.ActionLink("Edit", "EditRole",
-                    new {  id=item.ID  },
-                    htmlAttributes:new{@class="edit-item"})
-                    </button>
-                    <button class="btn btn-danger">
+                        new {  id=item.Id  },
+                        htmlAttributes:new{@class="edit-item"})
+                        </button>
+                        <button class="btn btn-danger">
                             @Html.ActionLink("Delete", "DeleteRole","Role",
-                    new {  id=item.ID  },
-                    htmlAttributes:new{@class="delete-item"})
-                    </button>
+                        new {  id=item.Id  },
+                        htmlAttributes:new{@class="delete-item"})
+                        </button>
+                    </div>
                 </td>
-                </div>
             </tr>
         }
     </tbody>
