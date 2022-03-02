@@ -90,7 +90,7 @@
 
         }
     </header>
-    
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -128,10 +128,10 @@
                         <h4>Some Links</h4>
                         <ul>
                             <li>
-                                <a href="#products">Products</a>
+                                <a asp-action="Index" asp-controller="Products">Products</a>
                             </li>
                             <li>
-                                <a href="#categories">Categories</a>
+                                <a asp-action="GetAllCategoriesForCustomer" asp-controller="Category">Categories</a>
                             </li>
                             <li>
                                 <a href="#services">Services</a>
