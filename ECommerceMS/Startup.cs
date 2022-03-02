@@ -45,6 +45,7 @@ namespace ECommerceMS
             services.AddScoped<IProductOrdersRepository, ProductOrdersRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
 
         }
 

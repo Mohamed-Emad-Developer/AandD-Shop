@@ -18,8 +18,14 @@ namespace ECommerceMS.services.repository
             _userManager = userManager;
         }
 
-        public int Create(Customer customer)
+        public int Create(string Id, string address, string phone)
         {
+            Customer customer = new Customer()
+            {
+                Id =  Id,
+                Address = address,
+                Phone = phone,
+            };
             DBContext.Customers.Add(customer);
             int rows = DBContext.SaveChanges();
             return rows;
