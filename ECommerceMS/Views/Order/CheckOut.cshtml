@@ -1,5 +1,8 @@
 ﻿@using ECommerceMS.ViewModel
 @model OrderDetailsViewModel
+@{
+    ViewData["title"] = "Checkout";
+}
 @section Style{
     <style>
         :root {
@@ -37,6 +40,8 @@
                 <input asp-for="Phone" class="form-control" />
                 <span class="text-danger" asp-validation-for="Phone"></span>
             </div>
+            <!------------------->
+            <div id="paypal-btn"></div>
             <input type="submit" value="Confirm Order" class="btn btn-success mb-3" />
         </form>
     </div>
@@ -76,3 +81,51 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <script>
+
+        let _total = @Html.Raw(@Model.TotalCost);
+
+        paypal.Button.render({
+            //Configure environment
+            env: 'sandbox',
+            client: {
+                sandbox: 'AfyURhltwiSLOqeD5yXKiOiXVOJhTOkSm0NhDxhM4x_LlcRx6xTazgvY59hffJn4_5tPn-GjlVJTXEu4'
+            },
+
+            //Customize button
+            locale: 'en_US', //ar_EG
+            style: {
+                size: 'medium',
+                color: 'gold',
+                shape: 'pill'
+            },
+            commit: true,
+
+            //Set up a payment
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: _total,
+                            currency: 'USD' //EGP
+                        }
+                    }]
+                });
+            },
+
+            //Execute the payment
+            onAuthorize: function (data, actions) {
+                return actions.payment.execute().then(function () {
+                    var url = '@Url.Action("ConfirmOrder", "Order", new { })';
+                    window.location.href = url;
+                });
+            }
+
+        }, '#paypal-btn')
+    </script>
+    }
