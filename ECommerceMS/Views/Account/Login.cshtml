@@ -48,11 +48,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <div class=" ">
-                                            <input asp-for="RememberMe" class="d-inline-block" />
-                                            <label asp-for="RememberMe" class="d-inline-block"></label>
+                                        <div class="d-flex justify-content-between">
+                                            <label asp-for="RememberMe" class="d-inline-block" style="text-align: left; width: 50%;"></label>
+                                            <input asp-for="RememberMe" class="d-inline-block" style="text-align: right;"/>
                                         </div>
                                         <span asp-validation-for="RememberMe" class="text-danger"></span>
                                     </div>
