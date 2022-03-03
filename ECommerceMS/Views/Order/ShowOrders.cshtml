@@ -1,6 +1,9 @@
 ﻿@model List<Order>
 @section Style{
     <style>
+        :root {
+            --main-color: #319E50;
+        }
         .zoom {
             transition: transform .2s;
             margin: 0 auto;
@@ -15,7 +18,7 @@
             height: 215px;
             margin: 30px 10px;
             padding: 20px 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 2px 2px 10px #319E50;
             transition: 0.3s ease-in-out
         }
         .cardanimation:hover {
