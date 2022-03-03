@@ -12,7 +12,14 @@
             Categories
         </h1>
         <div class="container">
-            <a asp-action="GetAllCategoriesForCustomer" asp-controller="Category" class="btn btn-success text-capitalize ms-3 mb-4">show all categories <i class="fas fa-angle-double-right"></i></a>
+            @if (!User.IsInRole("Admin"))
+            {
+                <a asp-action="GetAllCategoriesForCustomer" asp-controller="Category" class="btn btn-success text-capitalize ms-3 mb-4">show all categories <i class="fas fa-angle-double-right"></i></a>
+            }
+            else
+            {
+               <a asp-action="GetAllCategoriesForCustomer" asp-controller="Category" class="btn btn-dark text-capitalize ms-3 mb-4">show all categories <i class="fas fa-angle-double-right"></i></a> 
+            }
             <div class="categories-content">
                 <div class="row">
                     @foreach (var category in Model.Categories)
@@ -42,16 +49,23 @@
             <h1 class="text-uppercase font-weight-bolder text-center sec-header">
                 our products
             </h1>
-            <a asp-controller="Products" asp-action="Index" class="btn btn-success text-capitalize ms-3">show all product <i class="fas fa-angle-double-right"></i></a>
+            @if (!User.IsInRole("Admin"))
+            {
+                <a asp-controller="Products" asp-action="Index" class="btn btn-success text-capitalize ms-3">show all product <i class="fas fa-angle-double-right"></i></a>
+                
+            }else{<a asp-controller="Products" asp-action="Index" class="btn btn-dark text-capitalize ms-3">show all product <i class="fas fa-angle-double-right"></i></a>}
             <div class="row my-3">
                 @foreach (var product in Model.Products)
                 {
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
-                            <div class="d-flex justify-content-between">
-                                <a class="btn" style="font-size: 30px; text-align: left;" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@product.Id">🛒</a>
-                                <a class="btn" style="font-size: 30px; text-align: right;" asp-action="AddToFavouriteList" asp-controller="Products" asp-route-id="@product.Id">❤️</a>
-                            </div>
+                            @if (!User.IsInRole("Admin"))
+                            {
+                                <div class="d-flex justify-content-between">
+                                    <a class="btn" style="font-size: 30px; text-align: left;" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@product.Id">🛒</a>
+                                    <a class="btn" style="font-size: 30px; text-align: right;" asp-action="AddToFavouriteList" asp-controller="Products" asp-route-id="@product.Id">❤️</a>
+                                </div>
+                            }
                             <img src="~/Images/products/@product.Image" class="card-img-top" style="height: 300px;">
                             <div class="card-body" style="text-align: center;">
                                 <h4>@product.Name</h4>

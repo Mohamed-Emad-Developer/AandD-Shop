@@ -1,9 +1,6 @@
 ﻿@model List<Order>
 @section Style{
     <style>
-        :root {
-            --main-color: #319E50;
-        }
         .zoom {
             transition: transform .2s;
             margin: 0 auto;
@@ -18,7 +15,7 @@
             height: 215px;
             margin: 30px 10px;
             padding: 20px 15px;
-            box-shadow: 2px 2px 10px #319E50;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
             transition: 0.3s ease-in-out
         }
         .cardanimation:hover {
@@ -35,19 +32,21 @@
             opacity: 0;
             pointer-events: none;
             transition: 0.3s ease-in-out
+            
         }
 
         .cardanimation:hover  .test{
             visibility: visible;
             opacity: 10;
             margin-top: -40px;
+            box-shadow: 0 5px 20px rgb(26, 25, 25);
             transition-delay: 0.3s
         }
     </style>
 }
 <div class="row">
     <div class="col-lg-12 card text-center">
-        <div class="card-header text-success font-weight-bold">
+        <div class="card-header text-dark font-weight-bold">
             AllOrders
         </div>
         <div class="card-body">
@@ -58,16 +57,16 @@
                     <div class="card-body p-1 m-1">                        
                         <p class="Card-text">
                             <div>
-                                <span class="text-success font-weight-bold">Customer : </span> @item.CustomerName
+                                <span class="text-dark font-weight-bold">Customer : </span> @item.CustomerName
                             </div>
                             <div>
-                                <span class="text-success font-weight-bold"> Adress : </span>@item.CustomerAddress
+                                <span class="text-dark font-weight-bold"> Adress : </span>@item.CustomerAddress
                             </div>  
                             <div>
-                                <span class="text-success font-weight-bold"> Phone : </span>@item.CustomerPhone
+                                <span class="text-dark font-weight-bold"> Phone : </span>@item.CustomerPhone
                             </div>
                             <div>
-                                <span class="text-success font-weight-bold"> ordered at : </span>@item.Date
+                                <span class="text-dark font-weight-bold"> ordered at : </span>@item.Date
                             </div>
                             <div class="m-2">
                                 @*<input type="button" onclick="AjaxCall('@item.OrderNum')" value="products" class="btn btn-danger"/>*@
@@ -76,8 +75,8 @@
                         </p>
                         <div>
                            <div class="row m-2 test">
-                               <div class="col-12 card text-center">
-                                   <div class="card-header text-success font-weight-bold">
+                               <div class="col-12 card">
+                                   <div class="card-header text-dark font-weight-bold">
                                         products 
                                    </div>
                                    <div class="card-body p-1 m-1">
@@ -91,15 +90,15 @@
                                                     <div class="card-body">
                                                         <h4 class="card-title">@product.Product.Name</h4>
                                                         <p class="card-text text-break">@product.Product.Description</p>
-                                                        <p class="card-text">
+                                                        <p class="text-left">
                                                             <div>
-                                                                <span class="text-success font-weight-bold">Size: </span>@product.Product.Size
+                                                                <span class="text-dark font-weight-bold">Size: </span>@product.Product.Size
                                                             </div>
                                                             <div>
-                                                                <span class="text-success font-weight-bold">Quantity: </span>@product.Quantity
+                                                                <span class="text-dark font-weight-bold">Quantity: </span>@product.Quantity
                                                             </div>
                                                             <div>
-                                                                <span class="text-success font-weight-bold">Price: </span>@product.Product.Price
+                                                                <span class="text-dark font-weight-bold">Price: </span>@product.Product.Price
                                                             </div>
                                                         </p>
                                                     </div>
@@ -108,7 +107,7 @@
                                         }
                                    </div>
                                    <div class="card-footer">
-                                       <span class="text-success font-weight-bold">Total Cost: </span>@item.Cost $
+                                       <span class="text-dark font-weight-bold">Total Cost: </span>@item.Cost $
                                    </div>
                                </div>
                            </div>

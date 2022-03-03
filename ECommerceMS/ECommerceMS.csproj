@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Views\Order\ShowOrders.cshtml" />
     <None Include="Views\Role\AddRole.cshtml" />
     <None Include="Views\Role\EditRole.cshtml" />
     <None Include="Views\Role\Index.cshtml" />

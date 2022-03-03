@@ -39,6 +39,10 @@ img {
     height: 100px;
     object-fit: contain
 }
+.table tbody .trTAdmin:hover {
+    transform: scale(1.004);
+    box-shadow: 2px 2px 10px rgb(26, 25, 25);
+}
 
 
 .subtotal {

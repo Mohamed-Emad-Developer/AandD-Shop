@@ -8,10 +8,12 @@
 <hr />
 
 <p>
-    <a asp-action="Create" class ="btn btn-primary" style="margin:10px;color:white">Create New Product</a>
+    <a asp-action="Create" class ="btn btn-dark" style="margin:10px;color:white">Create New Product</a>
 </p>
 <hr />
-
+@section Style{
+    <link href="~/css/Cart.css" rel="stylesheet" />
+}
 <table class="table table-responsive-sm table-bordered table-hover">
     <thead>
         <tr>
@@ -38,12 +40,12 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="trTAdmin">
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <img src="~/Images/Products/@item.Image" width="300" height="300" />
+                    <img src="~/Images/Products/@item.Image" class="imgTadmin" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
@@ -55,7 +57,7 @@
                     @Html.DisplayFor(modelItem => item.Category.Title)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class ="btn btn-secondary w-100">Details</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class ="btn btn-dark w-100">Details</a>
                 </td>
             </tr>
         }
