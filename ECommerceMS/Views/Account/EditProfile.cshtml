@@ -1,0 +1,59 @@
+﻿@using ECommerceMS.ViewModel
+@model EditCustomerViewModel
+<div class="container">
+    <form asp-action="EditProfile" asp-controller="Account" method="post">
+        <div asp-validation-summary=All></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Address"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Phone"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="OldPassword"></label>
+                    <input asp-for="OldPassword" class="form-control" />
+                    <span asp-validation-for="OldPassword"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="NewPassword"></label>
+                    <input asp-for="NewPassword" class="form-control" />
+                    <span asp-validation-for="NewPassword"></span>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Edit" class="btn btn-success" />
+        <a asp-action="Account" asp-controller="Customer" asp-route-id="@UserManager.GetUserId(User)" class="btn btn-danger" >Cansel</a>
+    </form>
+</div>

@@ -44,10 +44,12 @@ namespace ECommerceMS.services.repository
             customer.Phone = newDetails.Phone;
             return DBContext.SaveChanges();
         }
-        public async Task<int> Edit(string id, Customer customer)
+        public int Edit(string id, string address, string phone)
         {
-            var customerAccount = await _userManager.FindByNameAsync(id);
             var customerInDb = DBContext.Customers.FirstOrDefault(c => c.Id == id);
+            customerInDb.Address = address;
+            customerInDb.Phone = phone;
+            
             return DBContext.SaveChanges();
         }
     }

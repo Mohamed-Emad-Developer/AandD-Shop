@@ -20,18 +20,18 @@
 
 
     @@media screen and (max-width: 768px) {
-         .customer-info h3, .customer-info h6 {
-          width:100%;
-          text-align:center;
-          overflow:clip;
-          text-overflow:ellipsis;
+        .customer-info h3, .customer-info h6 {
+            width: 100%;
+            text-align: center;
+            overflow: clip;
+            text-overflow: ellipsis;
         }
+
         .customer-info h6 {
-         font-size:14px;
+            font-size: 14px;
         }
-    
     }
-    
+
 
     .customer-info .links li a {
         display: block;
@@ -67,29 +67,37 @@
                 <h3>@Model.Cusomer.User.Name</h3>
                 <h6 class="text-muted">@Model.Cusomer.User.Email</h6>
                 <ul class="links">
-                    <li><a asp-action="" asp-controller="">edit your account</a></li>
+                    <li><a asp-action="EditProfile" asp-controller="Account" asp-route-id="@UserManager.GetUserId(User)">edit your account</a></li>
                     <li><a asp-action="Show_CusOrders" asp-controller="Order" asp-route-id="@Model.Cusomer.Id">your orders</a></li>
                     <li><a asp-action="FavouriteProducts" asp-controller="Products">favourite products</a></li>
                 </ul>
             </div>
         </div>
         <div class="col-lg-8 col-sm-6">
-            @foreach (var order in Model.Orders)
+            @if (Model.Orders.Count() == 0)
             {
-                <div class="order-info">
-                    <h3>@order.Cost EGP</h3>
+                <h3 class="text-muted text-center">No Orders yet</h3>
+            }
+            else
+            {
 
-                    <small class="text-muted">@order.Date</small>
-                    @foreach (var po in order.ProductOrders)
-                    {
-                        <div>
-                            <img width="100" height="100" src="~/Images/products/@po.Product.Image" />
-                            <p>@po.Product.Name - @po.Product.Price EGP - Quantity: @po.Quantity</p>
-                        </div>
-                    }
-                </div>
+                @foreach (var order in Model.Orders)
+                {
+                    <div class="order-info">
+                        <h3>@order.Cost EGP</h3>
+
+                        <small class="text-muted">@order.Date</small>
+                        @foreach (var po in order.ProductOrders)
+                        {
+                            <div>
+                                <img width="100" height="100" src="~/Images/products/@po.Product.Image" />
+                                <p>@po.Product.Name - @po.Product.Price EGP - Quantity: @po.Quantity</p>
+                            </div>
+                        }
+                    </div>
 
 
+                }
             }
         </div>
     </div>

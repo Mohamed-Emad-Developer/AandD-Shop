@@ -8,5 +8,6 @@ namespace ECommerceMS.services.repository
         Customer Get(string id);
         int UpdateNAP(string id, OrderDetailsViewModel newDetails);
         int Create(string Id, string address, string phone);
+        int Edit(string id, string address, string phone);
     }
 }

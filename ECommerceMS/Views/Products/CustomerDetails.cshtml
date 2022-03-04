@@ -3,50 +3,86 @@
 @{
     ViewData["Title"] = "Product Details";
 }
+<style>
+    .product-color {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        border-radius: 5px;
+        box-shadow: 0 0 10px #ddd;
+    }
 
-<h1>Product Details</h1>
-<hr />
+    .product-details {
+        box-shadow: 0 0 10px #ddd;
+        border-radius: 5px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        margin: 30px 0;
+    }
 
-<div>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Name
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Image
-        </dt>
-        <dd class = "col-sm-10">
-            <img src="~/Images/Products/@Model.Image" width="300" height="300" />
-        </dd>
-        <dt class = "col-sm-2">
-            Description
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            Size
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Size)
-        </dd>
-        <dt class = "col-sm-2">
-            Color
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Color)
-        </dd>
-        <dt class = "col-sm-2">
-            Price
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price) $
-        </dd>
-    </dl>
+    .product-img {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .product-information {
+        padding-left: 20px;
+        line-height: 35px;
+    }
+
+        .product-information p {
+            max-width: 100%;
+            width: auto;
+            overflow-wrap: anywhere;
+        }
+</style>
+<div class="container">
+    <div class="product-details">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="product-img">
+                    <img src="~/Images/products/@Model.Image" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="product-information">
+                    <h1><span class="text-muted">Name: </span>@Model.Name</h1>
+                    <h3><span class="text-muted">Price: </span><span class="text-success font-weight-bold">@Model.Price</span> EGP</h3>
+                    <h4 class="text-muted"><span class="text-muted">Category: </span><span class="badge badge-success">@Model.Category.Title</span></h4>
+
+                    <p>
+                        <span class="text-muted">Description: </span>
+                        @Model.Description
+                    </p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Color</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><div class="product-color" style="background:@Model.Color"></div></td>
+                                <td>@Model.Size</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <a class="btn btn-success" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@Model.Id"><i class="fas fa-cart-plus"></i> Add To Cart</a>
+                        <a class="btn btn-danger" asp-action="AddToFavouriteList" asp-controller="Products" asp-route-id="@Model.Id"><i class="fas fa-heart"></i> Add To favourite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<hr />
- 
