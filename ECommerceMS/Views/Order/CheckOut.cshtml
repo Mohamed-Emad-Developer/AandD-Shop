@@ -14,9 +14,9 @@
         }
 
         .zoom:hover {
-            -ms-transform: scale(1.5); /* IE 9 */
-            -webkit-transform: scale(1.5); /* Safari 3-8 */
-            transform: scale(1.5); 
+            -ms-transform: scale(1.1); /* IE 9 */
+            -webkit-transform: scale(1.1); /* Safari 3-8 */
+            transform: scale(1.1); 
         }
     </style>
 }
@@ -68,7 +68,7 @@
                                 <span class="font-weight-bold">Quantity: </span>@item.Quantity
                             </div>
                             <div>
-                                <span class="font-weight-bold text-success">Price: </span>@item.Product.Price $
+                                <span class="font-weight-bold text-success">Price: </span>@item.Product.Price EGP
                             </div>
                         </p>
                     </div>
@@ -77,12 +77,17 @@
             }
         </div> 
         <div class="card-footer text-muted  text-center">
-           <span class="font-weight-bold">Total Cost: </span> @Model.TotalCost $
+           <span class="font-weight-bold">Total Cost: </span> @Model.TotalCost EGP
         </div>
     </div>
 </div>
 
+
 @section Scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js">
+    </script>
 
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 

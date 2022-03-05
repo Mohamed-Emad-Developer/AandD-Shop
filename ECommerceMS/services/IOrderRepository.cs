@@ -10,5 +10,6 @@ namespace ECommerceMS.services.repository
         List<Order> Get();
         Order Get(int id);
         List<Order> GetByCusID(string id);
+        int CreateCustomProductOrder(CustomProductOrderViewModel newOrder);
     }
 }
