@@ -38,6 +38,20 @@
 
         .image-container canvas {
         }
+
+ label.label-upload {
+    width: 100%;
+    padding: 13px 5px;
+    background: white;
+    box-shadow: 0 0 10px #ddd;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 23px;
+    justify-content: center;
+    border: 2px solid #ddd;
+    gap: 10px;
+}
 </style>
 <div class="container">
     <div class="row">
@@ -48,10 +62,14 @@
             </div>
         </div>
         <div class="col-md-4">
-            <input type="file" id="upload">
-            <button id="export-btn" class="btn btn-primary">Export</button>
+            <label class="label-upload" for="upload">
+                <span>Upload Your Logo</span>
+                <i class="fas fa-plus"></i>
+                <input hidden type="file" id="upload">
+            </label>
+            <button id="export-btn" class="btn btn-primary w-100">Export</button>
             <div class="image-controllers">
-                @*<input type="text" id="title" class="form-control" />*@
+                <h4>Choose Any Style </h4>
                 <button>
                     <img data-img="~/images/customize/Black Hoodi.png"
                          src="~/images/customize/Black Hoodi.png"
@@ -69,8 +87,8 @@
                 </button>
             </div>
             <form asp-action="Style" asp-controller="Customize" method="post" enctype="multipart/form-data">
-                <input type="file" id="test" name="imgResult" />
-                <img id="img-result" name="imgResult" src="" style="width:100px;height:100px;object-fit:contain;" />
+                <input type="file" hidden id="test" name="imgResult" />
+                <img id="img-result" name="imgResult" src="" style="width:100px;height:100px;object-fit:contain;display:none;" />
                 <button type="submit" class="btn btn-success">Submit Order</button>
             </form>
         </div>
@@ -82,14 +100,17 @@
 <script src="~/js/FileSaver.min.js"></script>
 <script src="~/js/canvas-toBlob.js"></script>
 <script>
+    //file that will send to database
+    let inputFileData =document.getElementById("test");
 
-    let test =document.getElementById("test");
     //our main canvas
     let canvas = new fabric.Canvas("mycanvas");
+
+    //img that will display our custom product
     let imgResult = document.getElementById("img-result");
     const images = document.querySelectorAll(".image-controllers button img"); //get all template images
-    /*upload logo btn*/ document
-      .getElementById("upload")
+    /*upload logo btn*/
+    document.getElementById("upload")
       .addEventListener("change", function (e) {
         var file = e.target.files[0];
         var reader = new FileReader();
@@ -101,6 +122,7 @@
         };
         reader.readAsDataURL(file);
       });
+
     // set img  in template images as background when click on it
     images.forEach((singleImg) => {
       singleImg.addEventListener("click", function () {
@@ -113,26 +135,23 @@
         });
       });
     });
-    //var title = document.getElementById("title");
-    //var txt = "";
-    //var text = new fabric.Text(txt, {
-    //      fill: 'green'
-    //  });
-    //  canvas.add(text);
-    //title.addEventListener("input",()=>{
-    //    txt = title.value;
-    //})
-    let filesList = test.files;
+
+
       // Render the Text on Canvas
     $("#export-btn").click(() => {
+
+        //to display our result of image that was customized
           imgResult.src = $("#mycanvas").get(0).toDataURL();
+          imgResult.style.display="inline-block";
+          //some logic to send image to our form
      $("#mycanvas").get(0).toBlob((blob)=>{
        blob.lastModifiedDate = new Date();
     blob.name = "customize";
-           var newFile = new File([blob],"New Image",{type: blob.type});
-         //Array.from(filesList).push(
-         //);
-          console.log(newFile);
+           var newFile = new File([blob],"New Image"+new Date().getDate(),{type: blob.type});
+
+         let container = new DataTransfer();
+         container.items.add(newFile);
+          inputFileData.files = container.files;
      });
      });
 </script>
