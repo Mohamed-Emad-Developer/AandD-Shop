@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["title"] = "Customize";
+}
+<style>
+    .image-controllers {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 10px #ddd;
+        padding: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        gap: 10px;
+    }
+    .image-controllers button img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+ .image-controllers button   {
+    border:none;
+    box-shadow:0 0 10px #ddd;
+    background:white;
+}
+.image-container{
+    border:1px solid #ddd;
+    width:100%;
+    height:100%;
+    box-shadow:0 0 10px #ddd;
+    overflow:hidden;
+    text-align:center;
+}
+.image-container canvas{
+   
+}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="image-container">
+                <img src="" />
+                <canvas width="1000" height="1000" id="canvas-result"></canvas>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="image-controllers">
+
+                <button>
+                    <img data-img="~/images/customize/Black Hoodi.png"
+                         src="~/images/customize/Black Hoodi.png"
+                         alt="" />
+                </button>
+                <button>
+                    <img data-img="~/images/customize/Black Hoodi.png"
+                         src="~/images/customize/black t shirt.png"
+                         alt="" />
+                </button>
+                <button>
+                    <img data-img="~/images/customize/gray t shirt.png"
+                         src="~/images/customize/gray t shirt.png"
+                         alt="" />
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script src="~/js/fabric.js"></script>
+<script src="~/js/FileSaver.min.js"></script>
+<script src="~/js/canvas-toBlob.js"></script>
+<script>
+    let canvas = new fabric.Canvas("canvas-result");
+
+    fabric.Image.fromURL("../images/Categories/Hoodies.png", function (img) {
+      canvas.add(img);
+    });
+
+
+    $("#export-btn").click(() => {
+      $("#s")
+        .get(0)
+        .toBlob((blob) => {
+          saveAs(blob, "newImage.png");
+        });
+    });
+</script>
+
+}
