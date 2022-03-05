@@ -28,7 +28,7 @@ namespace ECommerceMS.Controllers
         {
             var homevm = new HomeViewModel()
             {
-                Products = _productRepository.GetAll().Take(4).ToList(),
+                Products = _productRepository.GetAll().Take(3).ToList(),
                 Categories = _categoryRepository.GetAll().Take(3).ToList()
             };
             return View(homevm);
