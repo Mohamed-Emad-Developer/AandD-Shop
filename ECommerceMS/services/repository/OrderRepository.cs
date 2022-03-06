@@ -24,6 +24,14 @@ namespace ECommerceMS.services.repository
             DBContext.Entry(NewOrder).GetDatabaseValues();
             return NewOrder.OrderNum;
         }
+        public int CreateCustomProductOrder(CustomProductOrderViewModel newOrder)
+        {
+            DateTime now = DateTime.Now;
+            Order NewOrder = new Order() { Cost = newOrder.Cost, Date = now, CustomerId = newOrder.CustomerID, CustomerAddress = newOrder.Adress, CustomerName = newOrder.Name, CustomerPhone = newOrder.Phone };
+            DBContext.SaveChanges();
+            DBContext.Entry(NewOrder).GetDatabaseValues();
+            return NewOrder.OrderNum;
+        }
         public List<Order> Get()
         {
             return (DBContext.Orders.Include(x => x.Customer).ThenInclude(x=>x.User)).Include(x => x.ProductOrders).ThenInclude(x => x.Product).ToList();
