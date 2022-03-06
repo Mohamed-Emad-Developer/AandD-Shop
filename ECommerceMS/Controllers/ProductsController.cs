@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ECommerceMS.Controllers
@@ -195,5 +196,18 @@ namespace ECommerceMS.Controllers
             return RedirectToAction("FavouriteProducts");
         }
 
+        public IActionResult Filter(string searchString)
+        {
+            var allProduct = ProductRepository.GetAll();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResultNew = allProduct.Where(n => string.Equals(n.Name, searchString, StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description, searchString, StringComparison.CurrentCultureIgnoreCase)).ToList();
+
+                return View("Index", filteredResultNew);
+            }
+
+            return View("Index", allProduct);
+        }
     }
 }

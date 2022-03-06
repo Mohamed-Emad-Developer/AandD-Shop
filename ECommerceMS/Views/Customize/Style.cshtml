@@ -90,7 +90,7 @@
             <form asp-action="Style" asp-controller="Customize" method="post" enctype="multipart/form-data">
                 <input type="file" hidden  id="test" asp-for="ImageFile" name="ImageFile" />
                 <img id="img-result" name="imgResult" src="" style="width:100px;height:100px;object-fit:contain;display:none;" />
-                <input asp-for="Cost" name="Cost" disabled   class="form-control"/> EGP
+                <input asp-for="Cost" name="Cost"   class="form-control"/> EGP
                 <button type="submit" class="btn btn-success">Submit Order</button>
             </form>
         </div>

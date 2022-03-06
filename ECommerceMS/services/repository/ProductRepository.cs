@@ -1,5 +1,6 @@
 ﻿using ECommerceMS.Data;
 using ECommerceMS.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +17,7 @@ namespace ECommerceMS.services
 
         public List<Product> GetAll()
         {
-            return DBContext.Products.ToList();
+            return DBContext.Products.Include(p=> p.Category).ToList();
         }
 
         public Product GetById(int id)

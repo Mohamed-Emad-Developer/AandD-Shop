@@ -10,22 +10,25 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ECommerceMS.Controllers
 {
 
     public class CustomizeController : Controller
     {
-        ECommerceDB context = new ECommerceDB();
+        private readonly ECommerceDB _context;
         private readonly UserManager<ApplicationUser> _userManager;
         readonly ICustomerRepository customerRepository;
         readonly IOrderRepository orderRepository;
-        public CustomizeController(ICustomerRepository _customerRepo,UserManager<ApplicationUser> userManager, IOrderRepository _orderRepo)
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public CustomizeController(ICustomerRepository _customerRepo, UserManager<ApplicationUser> userManager, IOrderRepository _orderRepo, ECommerceDB context, IWebHostEnvironment hostEnvironment)
         {
             _userManager = userManager;
             customerRepository = _customerRepo;
             orderRepository = _orderRepo;
-            
+            _context = context;
+            _hostEnvironment = hostEnvironment;
         }
 
         [Authorize(Roles ="Customer")]
@@ -36,13 +39,26 @@ namespace ECommerceMS.Controllers
         } 
         [Authorize(Roles ="Customer")]
         [HttpPost]
-        public IActionResult Style(CustomProduct NewCustomProduct)
+        public async Task<IActionResult>  Style(CustomProduct NewCustomProduct)
         {
             if (ModelState.IsValid == true)
             {
-                ECommerceDB context = new ECommerceDB();
-                context.CustomProducts.Add(NewCustomProduct);
-                context.SaveChanges();
+                if (NewCustomProduct.ImageFile != null)
+                {
+
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(NewCustomProduct.ImageFile.FileName);
+                    //string extension = Path.GetExtension(NewCustomProduct.ImageFile.FileName);
+                    NewCustomProduct.ImagePath = fileName = fileName + DateTime.Now.ToString("yymmssfff") + ".png";
+                    string path = Path.Combine(wwwRootPath + "/Images/customize/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await NewCustomProduct.ImageFile.CopyToAsync(fileStream);
+                    }
+                }
+
+                _context.CustomProducts.Add(NewCustomProduct);
+                _context.SaveChanges();
                 return RedirectToAction("SubmitStyle","Customize",new {id= NewCustomProduct.Id} );
             }
             return View();
@@ -57,7 +73,7 @@ namespace ECommerceMS.Controllers
             CPOVM.Phone = customer.Phone;
             CPOVM.CustomProductID = id;
             CPOVM.CustomerID = customer.Id;
-            CustomProduct customproduct=context.CustomProducts.FirstOrDefault(ww => ww.Id == id);
+            CustomProduct customproduct=_context.CustomProducts.FirstOrDefault(ww => ww.Id == id);
             CPOVM.Cost=customproduct.Cost;
             ViewData["customProduct"] = customproduct;
             return View(CPOVM);
@@ -68,16 +84,16 @@ namespace ECommerceMS.Controllers
             {
 
                 int ordernum = orderRepository.CreateCustomProductOrder(newOrder);
-                var customProduct = context.CustomProducts.FirstOrDefault(ww => ww.Id == newOrder.CustomProductID);
+                var customProduct = _context.CustomProducts.FirstOrDefault(ww => ww.Id == newOrder.CustomProductID);
                 customProduct.OrderNum = ordernum;
                 ViewData["success"] = "Order Saved successfully";
                 ViewData["CustomerID"] = newOrder.CustomerID;
-                return View();
+                return RedirectToAction("Show_CusOrders", "Order",new {id =_userManager.GetUserId(User) });
 
             }
             else
             {
-                CustomProduct customproduct = context.CustomProducts.FirstOrDefault(ww => ww.Id == newOrder.CustomProductID);
+                CustomProduct customproduct = _context.CustomProducts.FirstOrDefault(ww => ww.Id == newOrder.CustomProductID);
                 ViewData["customProduct"] = customproduct;
                 return View("SubmitStyle",newOrder);
             }
